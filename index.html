@@ -2,83 +2,138 @@
 <html lang="de">
 <head>
 <meta charset="UTF-8">
-<title>Trihundertvier‑NoN‑144 – Start</title>
+<title>Trihundertvier-NoN-144 – nanoWÜRFEL System</title>
 <style>
     body {
-        margin: 0;
-        padding: 20px;
         background: #0d0d0d;
-        color: #e5e5e5;
-        font-family: system-ui, -apple-system, Segoe UI, sans-serif;
+        color: #e6e6e6;
+        font-family: Consolas, monospace;
+        padding: 40px;
+        line-height: 1.5;
     }
-    .wrap {
-        max-width: 900px;
-        margin: auto;
-        background: #181818;
-        padding: 25px;
-        border-radius: 12px;
-        border: 1px solid #333;
+    h1, h2, h3 {
+        color: #00eaff;
     }
-    h1 {
-        margin-top: 0;
-        font-size: 2.2rem;
-        color: #6cf;
-    }
-    h2 {
-        color: #ffd35c;
-        margin-top: 30px;
-    }
-    .block {
-        margin-top: 20px;
-        padding: 15px;
-        background: #222;
-        border-radius: 10px;
-        border: 1px solid #333;
-    }
-    .label {
-        font-size: 0.75rem;
-        color: #aaa;
-        letter-spacing: 0.12em;
-        text-transform: uppercase;
-        margin-bottom: 8px;
-    }
-    .code {
-        font-family: "SF Mono", Menlo, Consolas, monospace;
+    pre {
         background: #111;
-        padding: 10px;
+        padding: 20px;
         border-radius: 8px;
-        border: 1px solid #333;
-        white-space: pre-wrap;
-        font-size: 0.9rem;
+        overflow-x: auto;
+        border: 1px solid #222;
+    }
+    .final {
+        color: #ff4d4d;
+        font-weight: bold;
     }
 </style>
 </head>
+
 <body>
 
-<div class="wrap">
+<h1>Trihundertvier-NoN-144</h1>
+<h2>nanoWÜRFEL – Systemübersicht</h2>
 
-    <h1>Trihundertvier‑NoN‑144</h1>
+<p>Dieses Projekt zeigt die universelle Würfel-Logik für parallele Prozesse (n = 1..6).  
+Alle Prozesse enden in einer gemeinsamen Achse (Final).</p>
 
-    <div class="block">
-        <div class="label">Projektstatus</div>
-        <p>
-            Repository: <strong>iki1uc/Trihundertvier‑NoN‑144</strong><br>
-            Commits: <strong>24</strong><br>
-            Modus: <strong>NoN‑144</strong><br>
-            Startdatei: <strong>html.exe → index.html</strong>
-        </p>
-    </div>
+<hr>
 
-    <div class="block">
-        <div class="label">Trihundertvier</div>
-        <h2>304 – Die Basis</h2>
-        <p>
-            Trihundertvier (304) ist der numerische Kern des Projekts.  
-            Es bildet die Grundlage für die NoN‑Struktur.
-        </p>
-    </div>
+<h2>1) n = 6 Bio / Chem / Gen – Matrix</h2>
 
-    <div class="block">
-        <div class="label">NoN‑Modus</div>
-        <h2>NoN – Not‑a‑Number</h2>
-        <p>
+<pre>
+W_1 = (Zustand, Energie, Richtung, Optik)
+W_2 = (Stabilität, Geschwindigkeit, Wechselwirkung, Optik)
+W_3 = (Regulation, Feedback, Mutation, Optik)
+W_4 = (Reparatur, Kontrolle, Schwelle, Optik)
+W_5 = (Aktivierung, Hemmung, Balance, Optik)
+W_6 = (Transport, Verteilung, Konzentration, Optik)
+
+F = Achse(W_1, W_2, W_3, W_4, W_5, W_6)
+</pre>
+
+<p class="final">→ Eine Achse. Eine Richtung. Ein Final.</p>
+
+<hr>
+
+<h2>2) Würfel-Legende</h2>
+
+<pre>
+D_i = Dual      (2 Pole)
+T_i = Trio      (3 Punkte)
+Q_i = Quart     (4 Flächen, optional)
+O_i = Optik     (Tiefe, optional)
+
+W_i = Mini-Würfel eines Prozesses
+F   = Final (gemeinsame Achse)
+</pre>
+
+<hr>
+
+<h2>3) ASCII-Würfel</h2>
+
+<pre>
+      +---------+
+     /         /|
+    /   W_i   / |
+   +---------+  |
+   |         |  |
+   |         |  +
+   |         | /
+   +---------+/
+</pre>
+
+<hr>
+
+<h2>4) ASCII-Animation (Frame-by-Frame)</h2>
+
+<pre>
+Frame 1
++
+
+Frame 2
++---------+
+
+Frame 3
++---------+
+/         /
+
+Frame 4
++---------+
+/         /|
+/         / |
+
+Frame 5 (voller Würfel)
+      +---------+
+     /         /|
+    /   W_i   / |
+   +---------+  |
+   |         |  |
+   |         |  +
+   |         | /
+   +---------+/
+
+Frame 6 (n Würfel)
+W_1 → W_2 → W_3 → W_4 → W_5 → W_6
+
+Frame 7 (Final)
+W_1 ---- W_2 ---- W_3 ---- W_4 ---- W_5 ---- W_6  ==>  F
+</pre>
+
+<hr>
+
+<h2>5) System-Formel</h2>
+
+<pre>
+n = 1..6
+
+W_i = (D_i, T_i, Q_i, O_i)
+
+S = { W_1, W_2, ..., W_n }
+
+F = Achse(W_1, W_2, ..., W_n)
+</pre>
+
+<p class="final">→ Das ist die universelle nanoWÜRFEL-Formel.</p>
+
+</body>
+</html>
