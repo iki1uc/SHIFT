@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <title>Projekt-Maske 698869</title>
+  <style>
+    body { font-family: sans-serif; background:#111; color:#eee; padding:20px; }
+    h1 { margin-bottom: 10px; }
+    .row { display:flex; justify-content:space-between; padding:6px 10px; margin:4px 0; border-radius:4px; }
+    .label { width:180px; }
+    .value { width:160px; text-align:right; }
+    .status { width:260px; text-align:right; font-size:0.9em; opacity:0.8; }
+    .green { background:#123c1a; }
+    .yellow { background:#3c3a12; }
+    .orange { background:#3c2612; }
+    .red { background:#3c1212; }
+    .inputs { margin-top:15px; font-size:0.9em; }
+    .inputs label { display:block; margin:4px 0; }
+    input[type="number"] { width:80px; }
+  </style>
+</head>
+<body>
+
+<h1>Projekt-Maske 698869</h1>
+
+<div id="row-stab" class="row">
+  <div class="label">[6] Projekt-Stabilität</div>
+  <div class="value" id="val-stab"></div>
+  <div class="status" id="stat-stab"></div>
+</div>
+
+<div id="row-mach" class="row">
+  <div class="label">[9] Projekt-Machbarkeit</div>
+  <div class="value" id="val-mach"></div>
+  <div class="status" id="stat-mach"></div>
+</div>
+
+<div id="row-final" class="row">
+  <div class="label">[8] Projekt-Final</div>
+  <div class="value" id="val-final"></div>
+  <div class="status" id="stat-final"></div>
+</div>
+
+<div id="row-harm" class="row">
+  <div class="label">[8] Projekt-Harmonie</div>
+  <div class="value" id="val-harm"></div>
+  <div class="status" id="stat-harm"></div>
+</div>
+
+<div id="row-rett" class="row">
+  <div class="label">[6] Projekt-Rettung (?)</div>
+  <div class="value" id="val-rett"></div>
+  <div class="status" id="stat-rett"></div>
+</div>
+
+<div id="row-gesamt" class="row">
+  <div class="label">[9] Gesamt-Status</div>
+  <div class="value" id="val-gesamt"></div>
+  <div class="status" id="stat-gesamt"></div>
+</div>
+
+<div class="inputs">
+  <h3>Eingaben</h3>
+  <label>Stabilität (%) <input id="in-stab" type="number" min="0" max="100" value="78"></label>
+  <label>Machbarkeit (0–3) <input id="in-mach" type="number" min="0" max="3" value="3"></label>
+  <label>Final (%) <input id="in-final" type="number" min="0" max="100" value="62"></label>
+  <label>Harmonie (%) <input id="in-harm" type="number" min="0" max="100" value="80"></label>
+  <button onclick="updateMask()">Aktualisieren</button>
+</div>
+
+<script>
+function colorClass(percent) {
+  if (percent >= 80) return 'green';
+  if (percent >= 60) return 'yellow';
+  if (percent >= 30) return 'orange';
+  return 'red';
+}
+
+function machColor(m) {
+  if (m >= 3) return 'green';
+  if (m === 2) return 'yellow';
+  if (m === 1) return 'orange';
+  return 'red';
+}
+
+function updateMask() {
+  const stab = Number(document.getElementById('in-stab').value || 0);
+  const mach = Number(document.getElementById('in-mach').value || 0);
+  const fin  = Number(document.getElementById('in-final').value || 0);
+  const harm = Number(document.getElementById('in-harm').value || 0);
+
+  const delta = (harm + mach) / 2;
+
+  // Stabilität
+  document.getElementById('val-stab').textContent = stab + ' %';
+  document.getElementById('stat-stab').textContent = stab >= 60 ? 'stabil' : 'instabil';
+  document.getElementById('row-stab').className = 'row ' + colorClass(stab);
+
+  // Machbarkeit
+  document.getElementById('val-mach').textContent = '+' + mach;
+  document.getElementById('stat-mach').textContent =
+    mach === 3 ? 'voll machbar' :
+    mach === 2 ? 'machbar mit Aufwand' :
+    mach === 1 ? 'kritisch' : 'nicht machbar';
+  document.getElementById('row-mach').className = 'row ' + machColor(mach);
+
+  // Final
+  document.getElementById('val-final').textContent = fin + ' %';
+  document.getElementById('stat-final').textContent = fin >= 90 ? 'fast abgeschlossen' :
+                                                      fin >= 60 ? 'in Arbeit' : 'frühe Phase';
+  document.getElementById('row-final').className = 'row ' + colorClass(fin);
+
+  // Harmonie
+  document.getElementById('val-harm').textContent = harm + ' %';
+  document.getElementById('stat-harm').textContent = harm >= 80 ? 'harmonisch' :
+                                                     harm >= 60 ? 'ok' :
+                                                     harm >= 30 ? 'angespannt' : 'disharmonisch';
+  document.getElementById('row-harm').className = 'row ' + colorClass(harm);
+
+  // Rettung (?)
+  document.getElementById('val-rett').textContent = '? = ' + delta.toFixed(1);
+  let rettText, rettColor;
+  if (delta > 30) { rettText = 'rettbar'; rettColor = 'green'; }
+  else if (delta >= 20) { rettText = 'möglich'; rettColor = 'yellow'; }
+  else if (delta >= 10) { rettText = 'kritisch'; rettColor = 'orange'; }
+  else { rettText = 'stoppen'; rettColor = 'red'; }
+  document.getElementById('stat-rett').textContent = rettText;
+  document.getElementById('row-rett').className = 'row ' + rettColor;
+
+  // Gesamtstatus
+  const allGreen = colorClass(stab)==='green' && machColor(mach)==='green' &&
+                   colorClass(fin)==='green' && colorClass(harm)==='green' &&
+                   rettColor==='green';
+  const gesamtText = allGreen
+    ? 'Projekt stabil, machbar und rettbar.'
+    : 'Projekt benötigt Aufmerksamkeit.';
+  document.getElementById('val-gesamt').textContent = '';
+  document.getElementById('stat-gesamt').textContent = gesamtText;
+  document.getElementById('row-gesamt').className = 'row ' + (allGreen ? 'green' : rettColor);
+}
+
+// initial
+updateMask();
+</script>
+
+</body>
+</html>
