@@ -143,3 +143,120 @@
 
   zeigeVerhandlungsStatus(H, E, F, D);
 </script>
+<!-- HUD: 3 Modi oben -->
+<div id="modeBar">
+    <span class="mode red">RAW_WAR</span> |
+    <span class="mode green">SAFE</span> |
+    <span class="mode blue">4ALL</span>
+    <span id="activeMode">AKTIV: -</span>
+</div>
+
+<!-- 3×3 Maske unten -->
+<div id="mask3x3">
+    <div class="row"><div id="m1"></div><div id="m2"></div><div id="m3"></div></div>
+    <div class="row"><div id="m4"></div><div id="m5"></div><div id="m6"></div></div>
+    <div class="row"><div id="m7"></div><div id="m8"></div><div id="m9"></div></div>
+</div>
+<style>
+/* HUD oben */
+#modeBar {
+    position: fixed;
+    top: 10px;
+    left: 10px;
+    background: rgba(0,0,0,0.55);
+    padding: 8px 12px;
+    border-radius: 6px;
+    color: white;
+    font-family: monospace;
+    z-index: 9999;
+}
+
+.mode { font-weight: bold; }
+.red { color: #ff3b3b; }
+.green { color: #00ff6a; }
+.blue { color: #00c8ff; }
+
+#activeMode {
+    margin-left: 20px;
+    font-weight: bold;
+    color: #ffd000;
+}
+
+/* 3×3 Maske unten */
+#mask3x3 {
+    position: fixed;
+    bottom: 10px;
+    left: 10px;
+    display: grid;
+    grid-template-columns: repeat(3, 40px);
+    grid-gap: 4px;
+    z-index: 9999;
+}
+
+#mask3x3 .row div {
+    width: 40px;
+    height: 40px;
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: monospace;
+    border-radius: 4px;
+}
+
+/* Farben pro Reihe */
+#mask3x3 .row:nth-child(1) div { background: rgba(255,0,0,0.45); }
+#mask3x3 .row:nth-child(2) div { background: rgba(0,150,255,0.45); }
+#mask3x3 .row:nth-child(3) div { background: rgba(0,255,100,0.45); }
+</style>
+<script>
+
+// Beispiel: aktueller Cube
+let currentCube = {
+    id: "CUBE_3",
+    ebene: 3,
+    dimension: 144
+};
+
+let currentProject = "RESPONDARY";
+
+/* Tastensteuerung */
+document.addEventListener("keydown", (e) => {
+    if (e.key === "r") activateMode("RAW_WAR");
+    if (e.key === "s") activateMode("SAFE");
+    if (e.key === "f") activateMode("4ALL");
+});
+
+/* Modus aktivieren */
+function activateMode(mode) {
+    const active = document.getElementById("activeMode");
+    active.innerText = "AKTIV: " + mode;
+
+    if (mode === "RAW_WAR") active.style.color = "#ff3b3b";
+    if (mode === "SAFE") active.style.color = "#00ff6a";
+    if (mode === "4ALL") active.style.color = "#00c8ff";
+
+    if (mode === "4ALL") {
+        fillMask(currentCube.ebene, currentCube.dimension, currentProject);
+    }
+}
+
+/* Maske füllen */
+function fillMask(ebene, dim, project) {
+    m1.innerText = ebene;
+    m5.innerText = dim;
+    m9.innerText = project;
+}
+
+/* CUBE_0 macht NICHT mit */
+function setCube(cubeId) {
+    if (cubeId === "CUBE_0") {
+        document.getElementById("mask3x3").style.display = "none";
+        document.getElementById("modeBar").style.display = "none";
+    } else {
+        document.getElementById("mask3x3").style.display = "grid";
+        document.getElementById("modeBar").style.display = "block";
+    }
+}
+
+</script>
