@@ -34,6 +34,112 @@
   const E = 1; // Ebene
   const F = 1; // Faktoren vollständig
   const D = 1; // Dimension stabil
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <title>ON-FLY 4ALL</title>
+    <style>
+        .cube-counter {
+            position: fixed;
+            bottom: 10px;
+            right: 10px;
+            background: rgba(0,0,0,0.4);
+            padding: 10px;
+            border-radius: 8px;
+            color: white;
+            font-family: monospace;
+            display: none;
+        }
+        .counter-row {
+            display: flex;
+            justify-content: space-between;
+        }
+        #kiMessage {
+            display:none;
+            position:fixed;
+            top:10px;
+            left:10px;
+            color:white;
+            font-family: monospace;
+        }
+        .cube-button {
+            margin: 10px;
+            padding: 10px;
+            border: 1px solid #444;
+            display: inline-block;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- KI-Meldung -->
+    <div id="kiMessage"></div>
+
+    <!-- Cubes zum Anklicken -->
+    <div class="cube-button" onclick="activateCube('CUBE_1')">CUBE_1</div>
+    <div class="cube-button" onclick="activateCube('CUBE_3')">CUBE_3</div>
+
+    <!-- Counter für CUBE_1 -->
+    <div class="cube-counter" id="CUBE_1_COUNTERS">
+        <div class="counter-row">
+            <span>A:</span><span id="CUBE_1_A">0</span>
+        </div>
+        <div class="counter-row">
+            <span>B:</span><span id="CUBE_1_B">0</span>
+        </div>
+    </div>
+
+    <!-- Counter für CUBE_3 -->
+    <div class="cube-counter" id="CUBE_3_COUNTERS">
+        <div class="counter-row">
+            <span>A:</span><span id="CUBE_3_A">0</span>
+        </div>
+        <div class="counter-row">
+            <span>B:</span><span id="CUBE_3_B">0</span>
+        </div>
+    </div>
+
+    <script>
+        function activateCube(cubeId) {
+            // alle Counter ausblenden
+            document.querySelectorAll('.cube-counter')
+                    .forEach(el => el.style.display = 'none');
+
+            // nur diesen Cube anzeigen
+            document.getElementById(cubeId + "_COUNTERS").style.display = 'block';
+
+            // ON-FLY KI-Check
+            onFlyCheck(cubeId);
+        }
+
+        function onFlyCheck(cubeId) {
+            // hier später echte Logik (Ebene/Faktor/Dimension)
+            let compatible = true;
+
+            if (compatible) {
+                showKI("ready – 4ALL kompatibel");
+                incCounter(cubeId, "A");
+                incCounter(cubeId, "B");
+            } else {
+                showKI("not ready – 4ALL nicht kompatibel");
+            }
+        }
+
+        function incCounter(cubeId, type) {
+            let el = document.getElementById(cubeId + "_" + type);
+            el.innerText = parseInt(el.innerText) + 1;
+        }
+
+        function showKI(msg) {
+            let box = document.getElementById("kiMessage");
+            box.innerText = msg;
+            box.style.display = "block";
+        }
+    </script>
+</body>
+</html>
 
   zeigeVerhandlungsStatus(H, E, F, D);
 </script>
