@@ -1,19 +1,20 @@
-<!DOCTYPE html>
-<html lang="de">
-<head>
-    <meta charset="UTF-8">
-    <title>FREMDSINGULARITAET – Verhandlungsebene</title>
-</head>
-<body style="background:#000; color:#0ff; font-family:Arial;">
+<script>
+function cubeKontakt(cubeID, projekt) {
 
-<h1>Verhandlungsebene (root)</h1>
-<p>Die Musik liegt eine Ebene tiefer. Wähle die Darstellung:</p>
+  // KI-Meldung: Bereitschaft
+  const bereit = 
+    cubeID + " → Bereitschaft 100% → Ressourcen stabil → Leitung frei → Projekt: " +
+    projekt + " → Bereit zur Arbeitseinleitung.";
 
-<ul>
-    <li><a href="1/index.html" style="color:#0ff;">Musik starten (Unterordner 1)</a></li>
-    <li><a href="1/index2.html" style="color:#0ff;">Alternative Darstellung</a></li>
-    <li><a href="1/index3.html" style="color:#0ff;">RAW‑Modus</a></li>
-</ul>
+  document.getElementById("cube-anker").textContent = bereit;
 
-</body>
-</html>
+  // KI-Meldung: Arbeitseinleitung
+  const start = 
+    cubeID + " → Arbeit eingeleitet → Prozess läuft…";
+
+  document.getElementById("cube-status").textContent = start;
+
+  // Hier startet die Cube-spezifische Arbeit
+  cubeJob(cubeID);
+}
+</script>
