@@ -1,20 +1,26 @@
-<script>
-function cubeKontakt(cubeID, projekt) {
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <title>Trihundertvier NoN 144</title>
+</head>
+<body>
 
-  // KI-Meldung: Bereitschaft
-  const bereit = 
-    cubeID + " → Bereitschaft 100% → Ressourcen stabil → Leitung frei → Projekt: " +
-    projekt + " → Bereit zur Arbeitseinleitung.";
+  <!-- Deine Seite, dein Inhalt -->
 
-  document.getElementById("cube-anker").textContent = bereit;
+  <!-- Buttons für Cubes (optional pro Seite) -->
+  <button onclick="cubeKontakt('CUBE_0', 'System')">Cube 0</button>
+  <button onclick="cubeKontakt('CUBE_1', 'RAW')">Cube 1</button>
+  <button onclick="cubeKontakt('CUBE_2', 'SAFE')">Cube 2</button>
+  <button onclick="cubeKontakt('CUBE_3', 'ADMIN')">Cube 3</button>
+  <button onclick="cubeKontakt('CUBE_4', 'HARMONIE')">Cube 4</button>
+  <button onclick="cubeKontakt('CUBE_5', 'KLÄRUNG')">Cube 5</button>
 
-  // KI-Meldung: Arbeitseinleitung
-  const start = 
-    cubeID + " → Arbeit eingeleitet → Prozess läuft…";
+  <!-- Fester Anker für KI-/Cube-Meldungen -->
+  <div id="cube-anker"></div>
+  <div id="cube-status"></div>
 
-  document.getElementById("cube-status").textContent = start;
-
-  // Hier startet die Cube-spezifische Arbeit
-  cubeJob(cubeID);
-}
-</script>
+  <!-- Zentrales Cube-Gehirn einbinden -->
+  <script src="cube-core.js"></script>
+</body>
+</html>
