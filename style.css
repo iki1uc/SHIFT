@@ -29,3 +29,14 @@
     margin-top: 80px;
     padding: 20px;
 }
+/* RAUM-GRUNDLAYOUT */
+#raum,
+#kontakt-raum,
+#action-raum {
+    margin-top: 100px;
+    padding: 20px;
+    font-family: Arial, sans-serif;
+    color: #eee;
+    background: #111;
+    border-radius: 8px;
+}
