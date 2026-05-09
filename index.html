@@ -1,43 +1,59 @@
 <!DOCTYPE html>
 <html lang="de">
 <head>
-    <meta charset="UTF-8">
-    <title>index</title>
-    <style>
-        body { 
-            font-family: Arial, sans-serif; 
-            background: #f5f5f5; 
-            padding: 40px; 
-        }
-        .box {
-            background: white;
-            padding: 20px;
-            border-radius: 8px;
-            max-width: 400px;
-            margin: auto;
-            box-shadow: 0 0 10px rgba(0,0,0,0.1);
-        }
-        button {
-            padding: 10px 20px;
-            border: none;
-            background: black;
-            color: white;
-            border-radius: 5px;
-            cursor: pointer;
-        }
-    </style>
+<meta charset="UTF-8">
+<title>CUBE3</title>
+<style>
+    body { background:#111; color:#eee; font-family:Arial; text-align:center; padding-top:40px; }
+    .top-buttons button {
+        padding:10px 20px; margin:5px; background:#333; color:#fff;
+        border:none; border-radius:5px; cursor:pointer;
+    }
+    .grid {
+        width:240px; margin:40px auto;
+        display:grid; grid-template-columns:repeat(3,80px); grid-gap:5px;
+    }
+    .cell {
+        background:#222; padding:25px 0; border-radius:5px;
+        cursor:pointer; font-size:20px;
+    }
+    #bez { margin-top:20px; font-size:22px; }
+</style>
 </head>
 <body>
 
-<div class="box">
-    <h2>Start</h2>
-    <p>Klick und gut.</p>
-    <button onclick="go()">GO</button>
+<h1>CUBE3</h1>
+
+<div class="top-buttons">
+    <button onclick="mode('ANF')">ANF</button>
+    <button onclick="mode('STB')">STB</button>
+    <button onclick="mode('UMR')">UMR</button>
 </div>
 
+<div class="grid">
+    <div class="cell" onclick="press(1)">1</div>
+    <div class="cell" onclick="press(2)">2</div>
+    <div class="cell" onclick="press(3)">3</div>
+    <div class="cell" onclick="press(4)">4</div>
+    <div class="cell" onclick="press(5)">5</div>
+    <div class="cell" onclick="press(6)">6</div>
+    <div class="cell" onclick="press(7)">7</div>
+    <div class="cell" onclick="press(8)">8</div>
+    <div class="cell" onclick="press(9)">9</div>
+</div>
+
+<div id="bez">BEZ: -</div>
+
 <script>
-function go() {
-    alert("läuft.");
+let currentMode = "ANF";
+
+function mode(m) {
+    currentMode = m;
+    document.getElementById("bez").innerText = "BEZ: " + m;
+}
+
+function press(n) {
+    alert("CUBE3 → " + currentMode + " → " + n);
 }
 </script>
 
