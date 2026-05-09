@@ -2,7 +2,7 @@
 <html lang="de">
 <head>
 <meta charset="UTF-8">
-<title>WÜRFEL · ALT / JETZT / DELTA</title>
+<title>WÜRFEL · OUTPUT</title>
 <style>
   body {
     margin: 0;
@@ -14,119 +14,63 @@
     align-items: center;
     height: 100vh;
   }
-  .cube {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 12px;
+  #output {
+    width: 420px;
+    height: 260px;
     background: #181818;
-    padding: 20px;
-    border-radius: 10px;
     border: 1px solid #444;
-    min-width: 520px;
-  }
-  .face {
-    border-radius: 6px;
-    padding: 10px 12px;
-    font-size: 13px;
+    border-radius: 8px;
+    padding: 14px;
+    overflow-y: auto;
+    font-size: 14px;
     line-height: 1.4;
-  }
-  .alt   { background:#222; border:1px solid #666; }
-  .now   { background:#202020; border:1px solid #555; }
-  .delta { background:#251b1b; border:1px solid #884444; }
-  .title {
-    font-weight: bold;
-    margin-bottom: 6px;
-    font-size: 12px;
-    letter-spacing: 0.06em;
-    text-transform: uppercase;
-    opacity: 0.8;
-  }
-  .controls {
-    grid-column: 1 / 4;
-    margin-top: 8px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    font-size: 12px;
-    opacity: 0.9;
+    white-space: pre-line;
   }
   button {
-    padding: 6px 12px;
-    border-radius: 4px;
-    border: none;
+    margin-top: 12px;
+    padding: 8px 14px;
     background: #444;
     color: #eee;
+    border: none;
+    border-radius: 4px;
     cursor: pointer;
-    font-size: 12px;
   }
   button:hover { background:#666; }
 </style>
 </head>
 <body>
 
-<div class="cube">
-  <div class="face alt" id="face-alt">
-    <div class="title">ALT · ZUSTAND</div>
-    <div id="alt-content">
-      stabil, weniger räume, aber funktional besser<br>
-      referenz: „so hat es früher gelaufen“
-    </div>
-  </div>
-
-  <div class="face now" id="face-now">
-    <div class="title">JETZT · ZUSTAND</div>
-    <div id="now-content">
-      mehr räume, mehr komplexität, gefühl: überladen<br>
-      ziel: neu strategie mit css + js voll nutzend
-    </div>
-  </div>
-
-  <div class="face delta" id="face-delta">
-    <div class="title">DELTA · STRATEGIE</div>
-    <div id="delta-content">
-      noch nicht gesetzt<br>
-      action replay kann ALT → JETZT übertragen
-    </div>
-  </div>
-
-  <div class="controls">
-    <span id="status">STATUS: beobachte ALT vs JETZT</span>
-    <div>
-      <button onclick="actionReplay()">ACTION REPLAY (ALT → JETZT)</button>
-      <button onclick="setDelta()">DELTA SETZEN</button>
-    </div>
-  </div>
+<div>
+  <div id="output">WÜRFEL bereit.\nWarte auf Vorgang…</div>
+  <button onclick="simulate()">VORGANG STARTEN</button>
 </div>
 
 <script>
-let altState = {
-  text: "stabil, weniger räume, aber funktional besser\nreferenz: „so hat es früher gelaufen“"
+function log(text) {
+  const out = document.getElementById("output");
+  out.innerText += "\n" + text;
+  out.scrollTop = out.scrollHeight;
+}
+
+// WÜRFEL-STRATEGIE (vereinfacht, aber echt)
+let cube = {
+  alt: "ALT-Zustand: stabil, funktional besser",
+  now: "JETZT-Zustand: komplex, überladen",
+  delta: 0
 };
 
-let nowState = {
-  text: "mehr räume, mehr komplexität, gefühl: überladen\nziel: neu strategie mit css + js voll nutzend"
-};
+function simulate() {
+  log("• Action Replay aktiviert → ALT wird Basis");
+  cube.now = cube.alt;
 
-function render() {
-  document.getElementById("alt-content").innerText  = altState.text;
-  document.getElementById("now-content").innerText  = nowState.text;
+  log("• Würfel stabilisiert (STB)");
+  log("• Würfel analysiert Delta…");
+
+  cube.delta = Math.floor(Math.random() * 3) + 1;
+
+  log("• UFR: Evolution +" + cube.delta);
+  log("• Neuer Zustand aktiv");
 }
-
-function actionReplay() {
-  // „alte zustand besser“ → wir übertragen ALT nach JETZT
-  nowState.text = altState.text + "\n[replay aktiv: von ALT übernommen]";
-  document.getElementById("status").innerText = "STATUS: ACTION REPLAY · JETZT = ALT (plus markierung)";
-  render();
-}
-
-function setDelta() {
-  const deltaText = prompt("DELTA (kurz): Was soll neu dazu, ohne ALT zu zerstören?", "");
-  if (!deltaText) return;
-  document.getElementById("delta-content").innerText = deltaText;
-  document.getElementById("status").innerText = "STATUS: DELTA gesetzt · ALT bleibt, JETZT wird erweitert";
-}
-
-render();
 </script>
 
 </body>
