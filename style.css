@@ -40,3 +40,29 @@
     background: #111;
     border-radius: 8px;
 }
+/* CUBES OBEN LINKS */
+#cubes {
+    display: flex;
+    gap: 10px;
+    position: absolute;
+    top: 120px;
+    left: 20px;
+}
+
+.cube {
+    width: 50px;
+    height: 50px;
+    background: #333;
+    color: #fff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 6px;
+    font-weight: bold;
+    border: 2px solid #555;
+}
+
+.cube.active {
+    background: #0077ff;
+    border-color: #00aaff;
+}
