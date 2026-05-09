@@ -66,3 +66,25 @@
     background: #0077ff;
     border-color: #00aaff;
 }
+/* ACTION-BUTTONS */
+.action-buttons {
+    display: flex;
+    gap: 15px;
+    margin-top: 20px;
+}
+
+.action-buttons button {
+    padding: 12px 20px;
+    background: #333;
+    color: #fff;
+    border: 2px solid #555;
+    border-radius: 6px;
+    font-size: 16px;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.action-buttons button:hover {
+    background: #0077ff;
+    border-color: #00aaff;
+}
