@@ -1,3 +1,44 @@
+<body>
+
+    <!-- ACTION-RAUM: START -->
+    <div id="action-raum">
+        ...
+    </div>
+    <!-- ACTION-RAUM: ENDE -->
+
+    <!-- ACTION-JS: START -->
+    <script>
+        let running = false;
+        let interval = null;
+
+        const startBtn = document.getElementById("start");
+        const stopBtn = document.getElementById("stop");
+        const resetBtn = document.getElementById("reset");
+
+        startBtn.addEventListener("click", () => {
+            if (!running) {
+                running = true;
+                interval = setInterval(() => {
+                    console.log("ACTION: läuft...");
+                }, 1000);
+            }
+        });
+
+        stopBtn.addEventListener("click", () => {
+            running = false;
+            clearInterval(interval);
+            console.log("ACTION: gestoppt");
+        });
+
+        resetBtn.addEventListener("click", () => {
+            running = false;
+            clearInterval(interval);
+            console.log("ACTION: reset");
+        });
+    </script>
+    <!-- ACTION-JS: ENDE -->
+
+</body>
 
 <!-- ACTION-RAUM: START -->
 <div id="action-raum">
