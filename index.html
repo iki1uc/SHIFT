@@ -2,10 +2,48 @@
 <html lang="de">
 <head>
   <meta charset="UTF-8">
-  <title>nanoWÜRFEL</title>
+  <title>nanoWÜRFEL – Action</title>
+  <style>
+    body { background:#000; color:#0f0; font-family: monospace; padding:2rem; }
+    input { width:100%; padding:0.5rem; background:#111; border:1px solid #0f0; color:#0f0; }
+    button { margin-top:0.5rem; padding:0.5rem; background:#0f0; color:#000; border:none; cursor:pointer; }
+    .block { margin-top:2rem; padding:1rem; border:1px solid #0f0; }
+    .title { font-weight:bold; margin-bottom:0.5rem; }
+  </style>
 </head>
 <body>
 
+  <h1>nanoWÜRFEL – Action + Move</h1>
+
+  <!-- ACTION BLOCK -->
+  <div class="block">
+    <div class="title">ACTION</div>
+    <input id="action_in" placeholder="Action eingeben…" onkeydown="if(event.key==='Enter') doAction()">
+    <button onclick="doAction()">ACTION</button>
+    <div id="action_out">bereit</div>
+  </div>
+
+  <!-- MOVE / STATE BLOCK -->
+  <div class="block">
+    <div class="title">MOVE / STATE</div>
+    <input id="move_in" placeholder="Move…" onkeydown="if(event.key==='Enter') doMove()">
+    <button onclick="doMove()">MOVE</button>
+    <div id="move_out">bereit</div>
+  </div>
+
+  <script>
+    function doAction() {
+      const v = document.getElementById('action_in').value.trim();
+      document.getElementById('action_out').textContent =
+        v === "" ? "keine Action" : "Action: " + v;
+    }
+
+    function doMove() {
+      const v = document.getElementById('move_in').value.trim();
+      document.getElementById('move_out').textContent =
+        v === "" ? "kein Move" : "State: OK → Move: " + v;
+    }
+  </script>
+
 </body>
 </html>
-<div id="app">WÜRFEL bereit</div>
