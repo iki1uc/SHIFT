@@ -2,7 +2,7 @@
 <html lang="de">
 <head>
   <meta charset="UTF-8">
-  <title>nanoWÜRFEL – Action</title>
+  <title>nanoWÜRFEL – Action + State</title>
   <style>
     body { background:#000; color:#0f0; font-family: monospace; padding:2rem; }
     input { width:100%; padding:0.5rem; background:#111; border:1px solid #0f0; color:#0f0; }
@@ -13,17 +13,17 @@
 </head>
 <body>
 
-  <h1>nanoWÜRFEL – Action + Move</h1>
+  <h1>nanoWÜRFEL – Action + State</h1>
 
-  <!-- ACTION BLOCK -->
+  <!-- ACTION -->
   <div class="block">
     <div class="title">ACTION</div>
-    <input id="action_in" placeholder="Action eingeben…" onkeydown="if(event.key==='Enter') doAction()">
+    <input id="action_in" placeholder="Action…" onkeydown="if(event.key==='Enter') doAction()">
     <button onclick="doAction()">ACTION</button>
     <div id="action_out">bereit</div>
   </div>
 
-  <!-- MOVE / STATE BLOCK -->
+  <!-- MOVE / STATE -->
   <div class="block">
     <div class="title">MOVE / STATE</div>
     <input id="move_in" placeholder="Move…" onkeydown="if(event.key==='Enter') doMove()">
@@ -32,16 +32,32 @@
   </div>
 
   <script>
+    let STATE = 0; // 0 = neutral, 1 = aktiv, 2 = fokus
+
     function doAction() {
       const v = document.getElementById('action_in').value.trim();
       document.getElementById('action_out').textContent =
-        v === "" ? "keine Action" : "Action: " + v;
+        v === "" ? "keine Action" : "Action ausgeführt: " + v;
     }
 
     function doMove() {
       const v = document.getElementById('move_in').value.trim();
+      if (v === "") {
+        document.getElementById('move_out').textContent = "kein Move";
+        return;
+      }
+
+      // kleine State-Logik wie damals
+      STATE = (STATE + 1) % 3;
+
+      const states = [
+        "STATE 0 → neutral",
+        "STATE 1 → aktiv",
+        "STATE 2 → fokus"
+      ];
+
       document.getElementById('move_out').textContent =
-        v === "" ? "kein Move" : "State: OK → Move: " + v;
+        states[STATE] + " | Move: " + v;
     }
   </script>
 
