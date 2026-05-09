@@ -2,289 +2,274 @@
 <html lang="de">
 <head>
   <meta charset="UTF-8">
-  <title>Trihundertvier NoN 144</title>
+  <title>Trihundertvier NoN 144 – Harmonie</title>
+  <style>
+    body { font-family: system-ui, sans-serif; background:#111; color:#eee; margin:0; padding:0; }
+
+    #nav {
+      position: fixed; top: 0; left: 0; right: 0;
+      background: #222; padding: 8px 12px; z-index: 1000;
+    }
+    #nav a { color:#ddd; margin-right:10px; text-decoration:none; }
+    #nav a:hover { text-decoration:underline; }
+
+    #main {
+      padding:60px 16px 80px 16px;
+    }
+
+    #cube-panel button {
+      margin:4px; padding:6px 10px; cursor:pointer;
+      background:#222; color:#eee; border:1px solid #444; border-radius:4px;
+    }
+    #cube-panel button.active {
+      border-color:#ffd000; color:#ffd000;
+    }
+
+    #cube-anker, #cube-status {
+      margin-top:16px; padding:8px; background:#181818; border-radius:4px;
+      font-family:monospace;
+    }
+
+    /* HUD oben */
+    #modeBar {
+      position: fixed;
+      top: 40px;
+      left: 10px;
+      background: rgba(0,0,0,0.7);
+      padding: 6px 10px;
+      border-radius: 6px;
+      color: white;
+      font-family: monospace;
+      z-index: 999;
+      display:flex;
+      gap:6px;
+      align-items:center;
+    }
+    .mode { font-weight: bold; }
+    .red { color: #ff3b3b; }
+    .green { color: #00ff6a; }
+    .blue { color: #00c8ff; }
+    #activeMode { margin-left: 10px; font-weight:bold; color:#ffd000; }
+
+    /* 3×3 Maske unten links */
+    #mask3x3 {
+      position: fixed;
+      bottom: 10px;
+      left: 10px;
+      display: grid;
+      grid-template-columns: repeat(3, 40px);
+      grid-gap: 4px;
+      z-index: 999;
+    }
+    #mask3x3 .cell {
+      width: 40px;
+      height: 40px;
+      color: white;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-family: monospace;
+      border-radius: 4px;
+      font-size:11px;
+    }
+    #mask3x3 .row1 .cell { background: rgba(255,0,0,0.45); }
+    #mask3x3 .row2 .cell { background: rgba(0,150,255,0.45); }
+    #mask3x3 .row3 .cell { background: rgba(0,255,100,0.45); }
+
+    /* RAUM */
+    #raum {
+      margin-top:24px;
+      display:flex;
+      gap:24px;
+    }
+    #cubes {
+      display:flex;
+      flex-direction:column;
+      gap:6px;
+    }
+    .cube {
+      width:60px; height:60px;
+      background:#222; border-radius:6px;
+      display:flex; align-items:center; justify-content:center;
+      font-family:monospace; cursor:pointer; border:1px solid #444;
+    }
+    .cube.active { border-color:#ffd000; color:#ffd000; }
+
+    #befehle {
+      display:flex;
+      flex-direction:column;
+      gap:6px;
+    }
+    .cmd {
+      padding:6px 10px;
+      background:#222;
+      border-radius:4px;
+      border:1px solid #444;
+      font-family:monospace;
+      cursor:pointer;
+    }
+  </style>
 </head>
 <body>
-<!-- NAVIGATION: START -->
+
 <nav id="nav">
-    <a href="index.html">Home</a>
-    <a href="kontakt.html">Kontakt</a>
-    <a href="action.html">Action</a>
+  <a href="index.html">Home</a>
+  <a href="kontakt.html">Kontakt</a>
+  <a href="action.html">Action</a>
 </nav>
-<!-- NAVIGATION: ENDE -->
 
-  <!-- Deine Seite, dein Inhalt -->
-
-  <!-- Buttons für Cubes (optional pro Seite) -->
-  <button onclick="cubeKontakt('CUBE_0', 'System')">Cube 0</button>
-  <button onclick="cubeKontakt('CUBE_1', 'RAW')">Cube 1</button>
-  <button onclick="cubeKontakt('CUBE_2', 'SAFE')">Cube 2</button>
-  <button onclick="cubeKontakt('CUBE_3', 'ADMIN')">Cube 3</button>
-  <button onclick="cubeKontakt('CUBE_4', 'HARMONIE')">Cube 4</button>
-  <button onclick="cubeKontakt('CUBE_5', 'KLÄRUNG')">Cube 5</button>
-
-  <!-- Fester Anker für KI-/Cube-Meldungen -->
-  <div id="cube-anker"></div>
-  <div id="cube-status"></div>
-
-  <!-- Zentrales Cube-Gehirn einbinden -->
-  <script src="cube-core.js"></script>
-</body>
-</html>
-<div id="vr-box"></div>
-
-<script src="verhandlung-core.js"></script>
-<script>
-  // Beispiel: hier setzt du, was für diese Seite gilt
-  // 1 = ok, 0 = nicht ok
-  const H = 1; // Harmonie
-  const E = 1; // Ebene
-  const F = 1; // Faktoren vollständig
-  const D = 1; // Dimension stabil
-<!DOCTYPE html>
-<html lang="de">
-<head>
-    <meta charset="UTF-8">
-    <title>ON-FLY 4ALL</title>
-    <style>
-        .cube-counter {
-            position: fixed;
-            bottom: 10px;
-            right: 10px;
-            background: rgba(0,0,0,0.4);
-            padding: 10px;
-            border-radius: 8px;
-            color: white;
-            font-family: monospace;
-            display: none;
-        }
-        .counter-row {
-            display: flex;
-            justify-content: space-between;
-        }
-        #kiMessage {
-            display:none;
-            position:fixed;
-            top:10px;
-            left:10px;
-            color:white;
-            font-family: monospace;
-        }
-        .cube-button {
-            margin: 10px;
-            padding: 10px;
-            border: 1px solid #444;
-            display: inline-block;
-            cursor: pointer;
-        }
-    </style>
-</head>
-<body>
-
-    <!-- KI-Meldung -->
-    <div id="kiMessage"></div>
-
-    <!-- Cubes zum Anklicken -->
-    <div class="cube-button" onclick="activateCube('CUBE_1')">CUBE_1</div>
-    <div class="cube-button" onclick="activateCube('CUBE_3')">CUBE_3</div>
-
-    <!-- Counter für CUBE_1 -->
-    <div class="cube-counter" id="CUBE_1_COUNTERS">
-        <div class="counter-row">
-            <span>A:</span><span id="CUBE_1_A">0</span>
-        </div>
-        <div class="counter-row">
-            <span>B:</span><span id="CUBE_1_B">0</span>
-        </div>
-    </div>
-
-    <!-- Counter für CUBE_3 -->
-    <div class="cube-counter" id="CUBE_3_COUNTERS">
-        <div class="counter-row">
-            <span>A:</span><span id="CUBE_3_A">0</span>
-        </div>
-        <div class="counter-row">
-            <span>B:</span><span id="CUBE_3_B">0</span>
-        </div>
-    </div>
-
-    <script>
-        function activateCube(cubeId) {
-            // alle Counter ausblenden
-            document.querySelectorAll('.cube-counter')
-                    .forEach(el => el.style.display = 'none');
-
-            // nur diesen Cube anzeigen
-            document.getElementById(cubeId + "_COUNTERS").style.display = 'block';
-
-            // ON-FLY KI-Check
-            onFlyCheck(cubeId);
-        }
-
-        function onFlyCheck(cubeId) {
-            // hier später echte Logik (Ebene/Faktor/Dimension)
-            let compatible = true;
-
-            if (compatible) {
-                showKI("ready – 4ALL kompatibel");
-                incCounter(cubeId, "A");
-                incCounter(cubeId, "B");
-            } else {
-                showKI("not ready – 4ALL nicht kompatibel");
-            }
-        }
-
-        function incCounter(cubeId, type) {
-            let el = document.getElementById(cubeId + "_" + type);
-            el.innerText = parseInt(el.innerText) + 1;
-        }
-
-        function showKI(msg) {
-            let box = document.getElementById("kiMessage");
-            box.innerText = msg;
-            box.style.display = "block";
-        }
-    </script>
-</body>
-</html>
-
-  zeigeVerhandlungsStatus(H, E, F, D);
-</script>
-<!-- HUD: 3 Modi oben -->
 <div id="modeBar">
-    <span class="mode red">RAW_WAR</span> |
-    <span class="mode green">SAFE</span> |
-    <span class="mode blue">4ALL</span>
-    <span id="activeMode">AKTIV: -</span>
+  <span class="mode red">RAW_WAR</span> |
+  <span class="mode green">SAFE</span> |
+  <span class="mode blue">4ALL</span>
+  <span id="activeMode">AKTIV: -</span>
 </div>
 
-<!-- 3×3 Maske unten -->
 <div id="mask3x3">
-    <div class="row"><div id="m1"></div><div id="m2"></div><div id="m3"></div></div>
-    <div class="row"><div id="m4"></div><div id="m5"></div><div id="m6"></div></div>
-    <div class="row"><div id="m7"></div><div id="m8"></div><div id="m9"></div></div>
+  <div class="row1">
+    <div id="m1" class="cell"></div>
+    <div id="m2" class="cell"></div>
+    <div id="m3" class="cell"></div>
+  </div>
+  <div class="row2">
+    <div id="m4" class="cell"></div>
+    <div id="m5" class="cell"></div>
+    <div id="m6" class="cell"></div>
+  </div>
+  <div class="row3">
+    <div id="m7" class="cell"></div>
+    <div id="m8" class="cell"></div>
+    <div id="m9" class="cell"></div>
+  </div>
 </div>
-<style>
-/* HUD oben */
-#modeBar {
-    position: fixed;
-    top: 10px;
-    left: 10px;
-    background: rgba(0,0,0,0.55);
-    padding: 8px 12px;
-    border-radius: 6px;
-    color: white;
-    font-family: monospace;
-    z-index: 9999;
-}
 
-.mode { font-weight: bold; }
-.red { color: #ff3b3b; }
-.green { color: #00ff6a; }
-.blue { color: #00c8ff; }
+<div id="main">
+  <h1>Trihundertvier NoN 144 – Harmonie‑Index</h1>
 
-#activeMode {
-    margin-left: 20px;
-    font-weight: bold;
-    color: #ffd000;
-}
+  <div id="cube-panel">
+    <button onclick="setCube(0)">CUBE_0</button>
+    <button onclick="setCube(1)">CUBE_1</button>
+    <button onclick="setCube(2)">CUBE_2</button>
+    <button onclick="setCube(3)">CUBE_3 (EVO)</button>
+    <button onclick="setCube(4)">CUBE_4</button>
+    <button onclick="setCube(5)">CUBE_5</button>
+  </div>
 
-/* 3×3 Maske unten */
-#mask3x3 {
-    position: fixed;
-    bottom: 10px;
-    left: 10px;
-    display: grid;
-    grid-template-columns: repeat(3, 40px);
-    grid-gap: 4px;
-    z-index: 9999;
-}
+  <div id="cube-anker">EVO‑/Status‑Ausgabe…</div>
+  <div id="cube-status">Kein Cube gewählt.</div>
 
-#mask3x3 .row div {
-    width: 40px;
-    height: 40px;
-    color: white;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font-family: monospace;
-    border-radius: 4px;
-}
+  <div id="raum">
+    <div id="cubes">
+      <div class="cube" id="C1" onclick="setCube(1)">C1</div>
+      <div class="cube" id="C2" onclick="setCube(2)">C2</div>
+      <div class="cube" id="C3" onclick="setCube(3)">C3</div>
+      <div class="cube" id="C4" onclick="setCube(4)">C4</div>
+    </div>
+    <div id="befehle">
+      <div class="cmd" onclick="cubeCommand('2ME')">2ME</div>
+      <div class="cmd" onclick="cubeCommand('USEME')">USEME</div>
+      <div class="cmd" onclick="cubeCommand('4ALL')">4ALL</div>
+      <div class="cmd" onclick="cubeCommand('EXIT')">EXIT</div>
+    </div>
+  </div>
+</div>
 
-/* Farben pro Reihe */
-#mask3x3 .row:nth-child(1) div { background: rgba(255,0,0,0.45); }
-#mask3x3 .row:nth-child(2) div { background: rgba(0,150,255,0.45); }
-#mask3x3 .row:nth-child(3) div { background: rgba(0,255,100,0.45); }
-</style>
+<script src="cube-core.js"></script>
+<script src="verhandlung-core.js"></script>
+
 <script>
+  // globaler aktueller Cube
+  window.currentCube = null;
 
-// Beispiel: aktueller Cube
-let currentCube = {
-    id: "CUBE_3",
-    ebene: 3,
-    dimension: 144
-};
-
-let currentProject = "RESPONDARY";
-
-/* Tastensteuerung */
-document.addEventListener("keydown", (e) => {
+  // HUD: Tastatursteuerung
+  document.addEventListener("keydown", (e) => {
     if (e.key === "r") activateMode("RAW_WAR");
     if (e.key === "s") activateMode("SAFE");
     if (e.key === "f") activateMode("4ALL");
-});
+  });
 
-/* Modus aktivieren */
-function activateMode(mode) {
+  function activateMode(mode) {
     const active = document.getElementById("activeMode");
     active.innerText = "AKTIV: " + mode;
-
     if (mode === "RAW_WAR") active.style.color = "#ff3b3b";
     if (mode === "SAFE") active.style.color = "#00ff6a";
     if (mode === "4ALL") active.style.color = "#00c8ff";
 
-    if (mode === "4ALL") {
-        fillMask(currentCube.ebene, currentCube.dimension, currentProject);
+    if (mode === "4ALL" && window.currentCube === 3) {
+      fillMask(3, 144, "RESPONDARY");
     }
-}
+  }
 
-/* Maske füllen */
-function fillMask(ebene, dim, project) {
+  function fillMask(ebene, dim, project) {
     m1.innerText = ebene;
     m5.innerText = dim;
     m9.innerText = project;
-}
+  }
 
-/* CUBE_0 macht NICHT mit */
-function setCube(cubeId) {
-    if (cubeId === "CUBE_0") {
-        document.getElementById("mask3x3").style.display = "none";
-        document.getElementById("modeBar").style.display = "none";
-    } else {
-        document.getElementById("mask3x3").style.display = "grid";
-        document.getElementById("modeBar").style.display = "block";
+  function setCube(id) {
+    window.currentCube = id;
+
+    // Buttons markieren
+    document.querySelectorAll('#cube-panel button').forEach((b, idx) => {
+      b.classList.toggle('active', idx === id);
+    });
+    document.querySelectorAll('.cube').forEach(c => c.classList.remove('active'));
+    if (id >= 1 && id <= 4) {
+      document.getElementById("C" + id).classList.add('active');
     }
-}
 
+    if (id === 0) {
+      document.getElementById("mask3x3").style.display = "none";
+      document.getElementById("modeBar").style.display = "none";
+    } else {
+      document.getElementById("mask3x3").style.display = "grid";
+      document.getElementById("modeBar").style.display = "flex";
+    }
+
+    if (id === 3) {
+      document.getElementById("cube-status").innerText =
+        "CUBE_3 aktiv – Evolutionsmodus (besondere Umstände dürfen besonders sein).";
+      const state = createState(true, true);
+      checkAssimilationOrContinue(state);
+    } else {
+      document.getElementById("cube-status").innerText =
+        "CUBE_" + id + " aktiv – ALT‑Mechanik.";
+      document.getElementById("cube-anker").innerText =
+        "ALT‑Mechanik: CUBE_" + id + " läuft wie immer.";
+    }
+  }
+
+  function cubeCommand(cmd) {
+    document.getElementById("cube-anker").innerText =
+      "Befehl: " + cmd + " (Cube " + window.currentCube + ")";
+  }
+
+  // Assimilation: ob was war – wenn nicht, index.html weiter
+  function checkAssimilationOrContinue(state) {
+    if (!state) {
+      document.getElementById("cube-anker").innerText =
+        "Nichts zu prüfen – Index läuft weiter.";
+      return;
+    }
+    if (window.currentCube !== 3) {
+      document.getElementById("cube-anker").innerText =
+        "Zustand erkannt, aber nicht CUBE_3 – ALT‑Mechanik weiter.";
+      return;
+    }
+
+    const result = assimilate(state);
+    document.getElementById("cube-anker").innerText =
+      "CUBE_3 Assimilation: " + result;
+
+    if (result.startsWith("NEIN")) {
+      document.getElementById("cube-status").innerText +=
+        " | Keine Assimilation – Index läuft weiter.";
+    } else {
+      document.getElementById("cube-status").innerText +=
+        " | Assimilation erfolgreich – CUBE_3 evoluiert.";
+    }
+  }
 </script>
-<!-- RAUM: START (oben links Cubes, Mitte Befehle) -->
-<div id="raum">
 
-    <!-- Cubes oben links -->
-    <div id="cubes">
-        <div class="cube" id="C1">C1</div>
-        <div class="cube" id="C2">C2</div>
-        <div class="cube" id="C3">C3</div>
-        <div class="cube" id="C4" class="active">C4</div>
-    </div>
-
-    <!-- Befehle in der Mitte -->
-    <div id="befehle">
-        <div class="cmd">2ME</div>
-        <div class="cmd">USEME</div>
-        <div class="cmd">4ALL</div>
-        <div class="cmd">EXIT</div>
-    </div>
-
-</div>
-<!-- RAUM: ENDE -->
+</body>
+</html>
