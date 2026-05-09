@@ -1,275 +1,59 @@
-<!DOCTYPE html>
-<html lang="de">
-<head>
-  <meta charset="UTF-8">
-  <title>Trihundertvier NoN 144 – Harmonie</title>
-  <style>
-    body { font-family: system-ui, sans-serif; background:#111; color:#eee; margin:0; padding:0; }
+/* ================================
+   SOLL-PROFIL (CSS/JS) – FINAL
+   ================================ */
 
-    #nav {
-      position: fixed; top: 0; left: 0; right: 0;
-      background: #222; padding: 8px 12px; z-index: 1000;
+// IST-Werte (Basis)
+const CSS_IST = { harmonie: 1, klarheit: 1, stabilitaet: 1 };
+const JS_IST  = { funktion: 1, harmonie: 1, performance: 1 };
+
+// NEU-Werte (index.html = SOLL)
+const CSS_NEU = { harmonie: 2, klarheit: 2, stabilitaet: 2 };
+const JS_NEU  = { funktion: 2, harmonie: 2, performance: 2 };
+
+// Technikprüfung – sagt IMMER, ob NEU > IST
+function technikBietetMehr(neu, alt) {
+    if (neu > alt) {
+        console.log("SOLL: Neue Technik bietet mehr als IST.");
+        return true;
     }
-    #nav a { color:#ddd; margin-right:10px; text-decoration:none; }
-    #nav a:hover { text-decoration:underline; }
+    console.log("IST bleibt: Neue Technik bietet NICHT mehr.");
+    return false;
+}
 
-    #main {
-      padding:60px 16px 80px 16px;
-    }
+// CSS-Prüfung
+function pruefeCSS(cssNeu, cssAlt) {
+    const neuScore = cssNeu.harmonie + cssNeu.klarheit + cssNeu.stabilitaet;
+    const altScore = cssAlt.harmonie + cssAlt.klarheit + cssAlt.stabilitaet;
+    return technikBietetMehr(neuScore, altScore);
+}
 
-    #cube-panel button {
-      margin:4px; padding:6px 10px; cursor:pointer;
-      background:#222; color:#eee; border:1px solid #444; border-radius:4px;
-    }
-    #cube-panel button.active {
-      border-color:#ffd000; color:#ffd000;
-    }
+// JS-Prüfung
+function pruefeJS(jsNeu, jsAlt) {
+    const neuScore = jsNeu.funktion + jsNeu.harmonie + jsNeu.performance;
+    const altScore = jsAlt.funktion + jsAlt.harmonie + jsAlt.performance;
+    return technikBietetMehr(neuScore, altScore);
+}
 
-    #cube-anker, #cube-status {
-      margin-top:16px; padding:8px; background:#181818; border-radius:4px;
-      font-family:monospace;
-    }
+// CUBE_3 entscheidet über SOLL
+function entscheideSOLL(cssNeu, cssAlt, jsNeu, jsAlt) {
 
-    /* HUD oben */
-    #modeBar {
-      position: fixed;
-      top: 40px;
-      left: 10px;
-      background: rgba(0,0,0,0.7);
-      padding: 6px 10px;
-      border-radius: 6px;
-      color: white;
-      font-family: monospace;
-      z-index: 999;
-      display:flex;
-      gap:6px;
-      align-items:center;
-    }
-    .mode { font-weight: bold; }
-    .red { color: #ff3b3b; }
-    .green { color: #00ff6a; }
-    .blue { color: #00c8ff; }
-    #activeMode { margin-left: 10px; font-weight:bold; color:#ffd000; }
+    const cssOK = pruefeCSS(cssNeu, cssAlt);
+    const jsOK  = pruefeJS(jsNeu, jsAlt);
 
-    /* 3×3 Maske unten links */
-    #mask3x3 {
-      position: fixed;
-      bottom: 10px;
-      left: 10px;
-      display: grid;
-      grid-template-columns: repeat(3, 40px);
-      grid-gap: 4px;
-      z-index: 999;
-    }
-    #mask3x3 .cell {
-      width: 40px;
-      height: 40px;
-      color: white;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      font-family: monospace;
-      border-radius: 4px;
-      font-size:11px;
-    }
-    #mask3x3 .row1 .cell { background: rgba(255,0,0,0.45); }
-    #mask3x3 .row2 .cell { background: rgba(0,150,255,0.45); }
-    #mask3x3 .row3 .cell { background: rgba(0,255,100,0.45); }
-
-    /* RAUM */
-    #raum {
-      margin-top:24px;
-      display:flex;
-      gap:24px;
-    }
-    #cubes {
-      display:flex;
-      flex-direction:column;
-      gap:6px;
-    }
-    .cube {
-      width:60px; height:60px;
-      background:#222; border-radius:6px;
-      display:flex; align-items:center; justify-content:center;
-      font-family:monospace; cursor:pointer; border:1px solid #444;
-    }
-    .cube.active { border-color:#ffd000; color:#ffd000; }
-
-    #befehle {
-      display:flex;
-      flex-direction:column;
-      gap:6px;
-    }
-    .cmd {
-      padding:6px 10px;
-      background:#222;
-      border-radius:4px;
-      border:1px solid #444;
-      font-family:monospace;
-      cursor:pointer;
-    }
-  </style>
-</head>
-<body>
-
-<nav id="nav">
-  <a href="index.html">Home</a>
-  <a href="kontakt.html">Kontakt</a>
-  <a href="action.html">Action</a>
-</nav>
-
-<div id="modeBar">
-  <span class="mode red">RAW_WAR</span> |
-  <span class="mode green">SAFE</span> |
-  <span class="mode blue">4ALL</span>
-  <span id="activeMode">AKTIV: -</span>
-</div>
-
-<div id="mask3x3">
-  <div class="row1">
-    <div id="m1" class="cell"></div>
-    <div id="m2" class="cell"></div>
-    <div id="m3" class="cell"></div>
-  </div>
-  <div class="row2">
-    <div id="m4" class="cell"></div>
-    <div id="m5" class="cell"></div>
-    <div id="m6" class="cell"></div>
-  </div>
-  <div class="row3">
-    <div id="m7" class="cell"></div>
-    <div id="m8" class="cell"></div>
-    <div id="m9" class="cell"></div>
-  </div>
-</div>
-
-<div id="main">
-  <h1>Trihundertvier NoN 144 – Harmonie‑Index</h1>
-
-  <div id="cube-panel">
-    <button onclick="setCube(0)">CUBE_0</button>
-    <button onclick="setCube(1)">CUBE_1</button>
-    <button onclick="setCube(2)">CUBE_2</button>
-    <button onclick="setCube(3)">CUBE_3 (EVO)</button>
-    <button onclick="setCube(4)">CUBE_4</button>
-    <button onclick="setCube(5)">CUBE_5</button>
-  </div>
-
-  <div id="cube-anker">EVO‑/Status‑Ausgabe…</div>
-  <div id="cube-status">Kein Cube gewählt.</div>
-
-  <div id="raum">
-    <div id="cubes">
-      <div class="cube" id="C1" onclick="setCube(1)">C1</div>
-      <div class="cube" id="C2" onclick="setCube(2)">C2</div>
-      <div class="cube" id="C3" onclick="setCube(3)">C3</div>
-      <div class="cube" id="C4" onclick="setCube(4)">C4</div>
-    </div>
-    <div id="befehle">
-      <div class="cmd" onclick="cubeCommand('2ME')">2ME</div>
-      <div class="cmd" onclick="cubeCommand('USEME')">USEME</div>
-      <div class="cmd" onclick="cubeCommand('4ALL')">4ALL</div>
-      <div class="cmd" onclick="cubeCommand('EXIT')">EXIT</div>
-    </div>
-  </div>
-</div>
-
-<script src="cube-core.js"></script>
-<script src="verhandlung-core.js"></script>
-
-<script>
-  // globaler aktueller Cube
-  window.currentCube = null;
-
-  // HUD: Tastatursteuerung
-  document.addEventListener("keydown", (e) => {
-    if (e.key === "r") activateMode("RAW_WAR");
-    if (e.key === "s") activateMode("SAFE");
-    if (e.key === "f") activateMode("4ALL");
-  });
-
-  function activateMode(mode) {
-    const active = document.getElementById("activeMode");
-    active.innerText = "AKTIV: " + mode;
-    if (mode === "RAW_WAR") active.style.color = "#ff3b3b";
-    if (mode === "SAFE") active.style.color = "#00ff6a";
-    if (mode === "4ALL") active.style.color = "#00c8ff";
-
-    if (mode === "4ALL" && window.currentCube === 3) {
-      fillMask(3, 144, "RESPONDARY");
-    }
-  }
-
-  function fillMask(ebene, dim, project) {
-    m1.innerText = ebene;
-    m5.innerText = dim;
-    m9.innerText = project;
-  }
-
-  function setCube(id) {
-    window.currentCube = id;
-
-    // Buttons markieren
-    document.querySelectorAll('#cube-panel button').forEach((b, idx) => {
-      b.classList.toggle('active', idx === id);
-    });
-    document.querySelectorAll('.cube').forEach(c => c.classList.remove('active'));
-    if (id >= 1 && id <= 4) {
-      document.getElementById("C" + id).classList.add('active');
+    if (cssOK && jsOK) {
+        console.log("CUBE_3: SOLL aktiviert (NEU > IST).");
+        document.getElementById("cube-status").innerText += " | SOLL aktiv.";
+        return "SOLL";
     }
 
-    if (id === 0) {
-      document.getElementById("mask3x3").style.display = "none";
-      document.getElementById("modeBar").style.display = "none";
-    } else {
-      document.getElementById("mask3x3").style.display = "grid";
-      document.getElementById("modeBar").style.display = "flex";
+    console.log("CUBE_3: IST bleibt aktiv (NEU ≤ IST).");
+    document.getElementById("cube-status").innerText += " | IST bleibt.";
+    return "IST";
+}
+
+// Automatische Prüfung beim Aktivieren von CUBE_3
+function pruefeSOLLBeiCube3() {
+    if (window.currentCube === 3) {
+        entscheideSOLL(CSS_NEU, CSS_IST, JS_NEU, JS_IST);
     }
-
-    if (id === 3) {
-      document.getElementById("cube-status").innerText =
-        "CUBE_3 aktiv – Evolutionsmodus (besondere Umstände dürfen besonders sein).";
-      const state = createState(true, true);
-      checkAssimilationOrContinue(state);
-    } else {
-      document.getElementById("cube-status").innerText =
-        "CUBE_" + id + " aktiv – ALT‑Mechanik.";
-      document.getElementById("cube-anker").innerText =
-        "ALT‑Mechanik: CUBE_" + id + " läuft wie immer.";
-    }
-  }
-
-  function cubeCommand(cmd) {
-    document.getElementById("cube-anker").innerText =
-      "Befehl: " + cmd + " (Cube " + window.currentCube + ")";
-  }
-
-  // Assimilation: ob was war – wenn nicht, index.html weiter
-  function checkAssimilationOrContinue(state) {
-    if (!state) {
-      document.getElementById("cube-anker").innerText =
-        "Nichts zu prüfen – Index läuft weiter.";
-      return;
-    }
-    if (window.currentCube !== 3) {
-      document.getElementById("cube-anker").innerText =
-        "Zustand erkannt, aber nicht CUBE_3 – ALT‑Mechanik weiter.";
-      return;
-    }
-
-    const result = assimilate(state);
-    document.getElementById("cube-anker").innerText =
-      "CUBE_3 Assimilation: " + result;
-
-    if (result.startsWith("NEIN")) {
-      document.getElementById("cube-status").innerText +=
-        " | Keine Assimilation – Index läuft weiter.";
-    } else {
-      document.getElementById("cube-status").innerText +=
-        " | Assimilation erfolgreich – CUBE_3 evoluiert.";
-    }
-  }
-</script>
-
-</body>
-</html>
+}
