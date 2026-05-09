@@ -2,38 +2,119 @@
 <html lang="de">
 <head>
   <meta charset="UTF-8">
-  <title>System 1/4 – Essenz</title>
+  <title>Trihundertvier‑NoN‑144 – Index</title>
+
+  <!-- STYLE -->
+  <link rel="stylesheet" href="style.css">
+
+  <!-- JS-KERNE -->
+  <script src="cube-core.js"></script>
+  <script src="verhandlungcore.js"></script>
 </head>
+
 <body>
 
-<h1>System 1/4</h1>
-<p>BETA‑1 · REAL‑MODE</p>
+<!-- NAVIGATION -->
+<div id="nav">
+  <a href="#action-raum">Action</a>
+  <a href="#systemkern">Systemkern</a>
+  <a href="#non">NoN</a>
+  <a href="#uebersicht">Übersicht</a>
+</div>
 
-<hr>
+<!-- CUBES -->
+<div id="cubes">
+  <div class="cube" id="cube1">1</div>
+  <div class="cube" id="cube2">2</div>
+  <div class="cube" id="cube3">3</div>
+</div>
 
-<h2>Cubes</h2>
-<ul>
-  <li>CUBE_0 – Ursprung</li>
-  <li>CUBE_1 – Aktion (BIOS)</li>
-  <li>CUBE_2 – Stabilität (BIOS)</li>
-  <li>CUBE_3 – SAFE / Real‑Mode</li>
-</ul>
+<!-- ACTION-RAUM -->
+<div id="action-raum">
+  <h1>Action</h1>
 
-<hr>
+  <p id="status">Status: bereit</p>
 
-<h2>Essenz</h2>
-<p>
-  Nicht x4 → x4+4.<br>
-  Näher an Wahrheit liegt: x³ – sich selbst bestätigend.
-</p>
+  <div class="action-buttons">
+    <button id="start">Start</button>
+    <button id="stop">Stop</button>
+    <button id="reset">Reset</button>
+  </div>
+</div>
 
-<hr>
+<!-- SYSTEMKERN -->
+<div id="systemkern" class="block">
+  <div class="label">Systemkern</div>
+  <h2>Trihundertvier‑NoN‑144</h2>
 
-<h2>Resümee</h2>
-<p>
-  Wahrheit ist das, was übrig bleibt, wenn alles Nicht‑Tragende entfernt wurde.<br>
-  Diese Seite ist eine minimale Wiederherstellung, die einfach steht.
-</p>
+  <ul>
+    <li><strong>304:</strong> Ursprung</li>
+    <li><strong>NoN:</strong> Übergang</li>
+    <li><strong>144:</strong> Stabilität</li>
+  </ul>
+
+  <div class="code">
+    Status: Aktiv<br>
+    Modus: html.exe<br>
+    Start: index.html
+  </div>
+</div>
+
+<!-- NoN -->
+<div id="non" class="block">
+  <div class="label">NoN‑Modus</div>
+  <h2>NoN – Not‑a‑Number</h2>
+
+  <ul>
+    <li>NoN‑Punkt: Grenze</li>
+    <li>NoN‑Modus: Kontrolle</li>
+    <li>NoN‑Status: neutral</li>
+  </ul>
+
+  <div class="code">
+    Status: Aktiv<br>
+    Funktion: Kontrollpunkt zwischen 304 und 144
+  </div>
+</div>
+
+<!-- ÜBERSICHT -->
+<div id="uebersicht" class="block">
+  <div class="label">Systemübersicht</div>
+  <h2>System – 304 / NoN / 144</h2>
+
+  <p>Diese drei Elemente bilden die funktionale Architektur.</p>
+</div>
+
+<!-- ACTION-JS -->
+<script>
+let running = false;
+let interval = null;
+
+const startBtn = document.getElementById("start");
+const stopBtn = document.getElementById("stop");
+const resetBtn = document.getElementById("reset");
+const statusBox = document.getElementById("status");
+
+startBtn.addEventListener("click", () => {
+  if (!running) {
+    running = true;
+    statusBox.textContent = "Status: läuft...";
+    interval = setInterval(() => {}, 1000);
+  }
+});
+
+stopBtn.addEventListener("click", () => {
+  running = false;
+  clearInterval(interval);
+  statusBox.textContent = "Status: gestoppt";
+});
+
+resetBtn.addEventListener("click", () => {
+  running = false;
+  clearInterval(interval);
+  statusBox.textContent = "Status: bereit";
+});
+</script>
 
 </body>
 </html>
