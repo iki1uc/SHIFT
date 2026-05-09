@@ -2,62 +2,68 @@
 <html lang="de">
 <head>
   <meta charset="UTF-8">
-  <title>nanoWÜRFEL – Action + State</title>
+  <title>nanoWÜRFEL</title>
   <style>
-    body { background:#000; color:#0f0; font-family: monospace; padding:2rem; }
-    input { width:100%; padding:0.5rem; background:#111; border:1px solid #0f0; color:#0f0; }
-    button { margin-top:0.5rem; padding:0.5rem; background:#0f0; color:#000; border:none; cursor:pointer; }
-    .block { margin-top:2rem; padding:1rem; border:1px solid #0f0; }
-    .title { font-weight:bold; margin-bottom:0.5rem; }
+    body {
+      background:#000;
+      color:#0f0;
+      font-family: monospace;
+      padding:2rem;
+    }
+    input {
+      width:100%;
+      padding:0.5rem;
+      background:#111;
+      border:1px solid #0f0;
+      color:#0f0;
+    }
+    button {
+      margin-top:0.5rem;
+      padding:0.5rem;
+      background:#0f0;
+      color:#000;
+      border:none;
+      cursor:pointer;
+    }
+    #out {
+      margin-top:1rem;
+      padding:1rem;
+      border:1px solid #0f0;
+      white-space:pre-wrap;
+    }
   </style>
 </head>
 <body>
 
-  <h1>nanoWÜRFEL – Action + State</h1>
+  <h1>nanoWÜRFEL</h1>
 
-  <!-- ACTION -->
-  <div class="block">
-    <div class="title">ACTION</div>
-    <input id="action_in" placeholder="Action…" onkeydown="if(event.key==='Enter') doAction()">
-    <button onclick="doAction()">ACTION</button>
-    <div id="action_out">bereit</div>
-  </div>
+  <input id="in" placeholder="Action oder Move…" onkeydown="if(event.key==='Enter') run()">
+  <button onclick="run()">OK</button>
 
-  <!-- MOVE / STATE -->
-  <div class="block">
-    <div class="title">MOVE / STATE</div>
-    <input id="move_in" placeholder="Move…" onkeydown="if(event.key==='Enter') doMove()">
-    <button onclick="doMove()">MOVE</button>
-    <div id="move_out">bereit</div>
-  </div>
+  <div id="out">bereit</div>
 
   <script>
-    let STATE = 0; // 0 = neutral, 1 = aktiv, 2 = fokus
+    let STATE = 0;
 
-    function doAction() {
-      const v = document.getElementById('action_in').value.trim();
-      document.getElementById('action_out').textContent =
-        v === "" ? "keine Action" : "Action ausgeführt: " + v;
-    }
-
-    function doMove() {
-      const v = document.getElementById('move_in').value.trim();
+    function run() {
+      const v = document.getElementById('in').value.trim();
       if (v === "") {
-        document.getElementById('move_out').textContent = "kein Move";
+        document.getElementById('out').textContent = "kein Input";
         return;
       }
 
-      // kleine State-Logik wie damals
+      // ACTION erkennung
+      if (v.toLowerCase().startsWith("action")) {
+        document.getElementById('out').textContent = "ACTION: " + v;
+        return;
+      }
+
+      // MOVE / STATE Logik
       STATE = (STATE + 1) % 3;
+      const states = ["neutral", "aktiv", "fokus"];
 
-      const states = [
-        "STATE 0 → neutral",
-        "STATE 1 → aktiv",
-        "STATE 2 → fokus"
-      ];
-
-      document.getElementById('move_out').textContent =
-        states[STATE] + " | Move: " + v;
+      document.getElementById('out').textContent =
+        "STATE: " + states[STATE] + "\nMOVE: " + v;
     }
   </script>
 
