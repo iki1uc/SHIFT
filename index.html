@@ -2,7 +2,7 @@
 <html lang="de">
 <head>
 <meta charset="UTF-8">
-<title>WÜRFEL · OUTPUT</title>
+<title>CUBE · Fokus + MA³</title>
 <style>
   body {
     margin: 0;
@@ -14,20 +14,47 @@
     align-items: center;
     height: 100vh;
   }
-  #output {
+  .wrap {
+    display: flex;
+    gap: 14px;
+  }
+  .panel {
     width: 420px;
-    height: 260px;
     background: #181818;
     border: 1px solid #444;
-    border-radius: 8px;
-    padding: 14px;
+    border-radius: 10px;
+    padding: 20px;
+  }
+  #input {
+    width: 100%;
+    padding: 8px;
+    background: #222;
+    color: #eee;
+    border: 1px solid #444;
+    border-radius: 4px;
+    margin-bottom: 12px;
+  }
+  #output {
+    height: 180px;
+    background: #151515;
+    border: 1px solid #333;
+    border-radius: 6px;
+    padding: 10px;
     overflow-y: auto;
+    white-space: pre-line;
     font-size: 14px;
-    line-height: 1.4;
+  }
+  .ma {
+    width: 180px;
+    background: #202020;
+    border: 1px solid #555;
+    border-radius: 10px;
+    padding: 14px;
+    font-size: 13px;
     white-space: pre-line;
   }
   button {
-    margin-top: 12px;
+    margin-top: 10px;
     padding: 8px 14px;
     background: #444;
     color: #eee;
@@ -40,36 +67,50 @@
 </head>
 <body>
 
-<div>
-  <div id="output">WÜRFEL bereit.\nWarte auf Vorgang…</div>
-  <button onclick="simulate()">VORGANG STARTEN</button>
+<div class="wrap">
+
+  <!-- CUBE-RAUM -->
+  <div class="panel">
+    <input id="input" placeholder="ANF 1 / STB 2 / UFR 3 …">
+    <button onclick="run()">OK</button>
+    <div id="output">Bereit.</div>
+  </div>
+
+  <!-- MA³ MINI-SICHT -->
+  <div class="ma" id="ma3">
+    MA³ bereit.
+  </div>
+
 </div>
 
 <script>
-function log(text) {
+let lvl = 0;
+
+function log(t) {
   const out = document.getElementById("output");
-  out.innerText += "\n" + text;
+  out.innerText += "\n" + t;
   out.scrollTop = out.scrollHeight;
+
+  // usemeX4 → MA³
+  document.getElementById("ma3").innerText = "MA³:\n" + t;
 }
 
-// WÜRFEL-STRATEGIE (vereinfacht, aber echt)
-let cube = {
-  alt: "ALT-Zustand: stabil, funktional besser",
-  now: "JETZT-Zustand: komplex, überladen",
-  delta: 0
-};
+function run() {
+  const val = document.getElementById("input").value.trim();
+  if (!val) return;
 
-function simulate() {
-  log("• Action Replay aktiviert → ALT wird Basis");
-  cube.now = cube.alt;
+  const parts = val.split(" ");
+  const cmd = parts[0].toUpperCase();
+  const num = parseInt(parts[1]) || 1;
 
-  log("• Würfel stabilisiert (STB)");
-  log("• Würfel analysiert Delta…");
+  if (cmd === "ANF" || cmd === "STB" || cmd === "UFR") {
+    lvl += num;
+    log("• " + cmd + " +" + num + " → LEVEL " + lvl);
+  } else {
+    log("• Unbekannter Move: " + val);
+  }
 
-  cube.delta = Math.floor(Math.random() * 3) + 1;
-
-  log("• UFR: Evolution +" + cube.delta);
-  log("• Neuer Zustand aktiv");
+  document.getElementById("input").value = "";
 }
 </script>
 
