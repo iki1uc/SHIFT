@@ -2,83 +2,10 @@
 <html lang="de">
 <head>
 <meta charset="UTF-8">
-<title>CUBE3 · Start</title>
-<style>
-  body {
-    margin: 0;
-    background: #111;
-    color: #eee;
-    font-family: Arial, sans-serif;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-  }
-  .panel {
-    width: 420px;
-    background: #181818;
-    border: 1px solid #444;
-    border-radius: 10px;
-    padding: 20px;
-  }
-  #input {
-    width: 100%;
-    padding: 8px;
-    background: #222;
-    color: #eee;
-    border: 1px solid #444;
-    border-radius: 4px;
-    margin-bottom: 12px;
-  }
-  #output {
-    height: 220px;
-    background: #151515;
-    border: 1px solid #333;
-    border-radius: 6px;
-    padding: 10px;
-    overflow-y: auto;
-    white-space: pre-line;
-    font-size: 14px;
-  }
-</style>
+<title>TEST CUBE INDEX</title>
 </head>
 <body>
-
-<div class="panel">
-  <h3>WILLKOMMEN · CUBE3</h3>
-  <input id="input" placeholder="ANF 1 / STB 2 / UFR 3 …">
-  <div id="output">Bereit.</div>
-</div>
-
-<script>
-let lvl = 0;
-
-function log(t) {
-  const out = document.getElementById("output");
-  out.innerText += "\n" + t;
-  out.scrollTop = out.scrollHeight;
-}
-
-document.getElementById("input").addEventListener("keydown", e => {
-  if (e.key === "Enter") {
-    const val = e.target.value.trim();
-    if (!val) return;
-
-    const [cmd, numRaw] = val.split(" ");
-    const num = parseInt(numRaw) || 1;
-    const C = cmd.toUpperCase();
-
-    if (["ANF", "STB", "UFR"].includes(C)) {
-      lvl += num;
-      log("• " + C + " +" + num + " → LEVEL " + lvl);
-    } else {
-      log("• Unbekannter Move: " + val);
-    }
-
-    e.target.value = "";
-  }
-});
-</script>
-
+<h1>TEST CUBE INDEX</h1>
+<p>Wenn du das siehst, steht index.html wirklich.</p>
 </body>
 </html>
