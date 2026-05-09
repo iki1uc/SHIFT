@@ -2,80 +2,44 @@
 <html lang="de">
 <head>
   <meta charset="UTF-8">
-  <title>1/4 – cubes (minimal)</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <style>
-    * { box-sizing: border-box; margin: 0; padding: 0; }
-    body {
-      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-      background: #ffffff;
-      color: #000000;
-      min-height: 100vh;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-    .wrap {
-      width: 100%;
-      max-width: 480px;
-      padding: 1.5rem;
-      text-align: center;
-    }
-    h1 {
-      font-size: 1.4rem;
-      margin-bottom: .75rem;
-    }
-    p {
-      font-size: .9rem;
-      margin-bottom: 1.25rem;
-    }
-    .options {
-      display: flex;
-      flex-direction: column;
-      gap: .75rem;
-    }
-    button {
-      padding: .75rem 1rem;
-      font-size: .95rem;
-      border-radius: .4rem;
-      border: 1px solid #000;
-      background: #fff;
-      cursor: pointer;
-    }
-    button:active {
-      transform: translateY(1px);
-    }
-    .log {
-      margin-top: 1.25rem;
-      font-size: .8rem;
-      min-height: 1.2rem;
-      color: #444;
-    }
-  </style>
+  <title>System 1/4 – Index</title>
 </head>
 <body>
-  <div class="wrap">
-    <h1>System 1/4 – cubes</h1>
-    <p>Alles weiß, fast nichts nutzbar – aber es lädt, reagiert und zeigt Fehler, falls welche da sind.</p>
 
-    <div class="options">
-      <button onclick="selectMode('SAFE / REAL‑MODE')">
-        Option 1: SAFE / REAL‑MODE
-      </button>
-      <button onclick="selectMode('RAW‑WAR / STRESS')">
-        Option 2: RAW‑WAR / STRESS
-      </button>
-    </div>
+  <h1>System 1/4</h1>
+  <h2>BETA‑1 · REAL‑MODE</h2>
 
-    <div class="log" id="log">kein Modus gewählt.</div>
-  </div>
+  <p>
+    Dies ist eine einfache HTML‑Indexseite ohne CSS und ohne JavaScript.<br>
+    Sie dient nur dazu, dass etwas steht, lädt und lesbar ist.
+  </p>
 
-  <script>
-    function selectMode(mode) {
-      const log = document.getElementById('log');
-      log.textContent = 'gewählt: ' + mode + ' (funktioniert noch, aber macht absichtlich nichts weiter).';
-      // hier später echte Logik einbauen – aktuell nur „lebt, aber nutzlos“
-    }
-  </script>
+  <hr>
+
+  <h3>Cubes</h3>
+  <ul>
+    <li><strong>CUBE_0</strong> – Ursprung (Alpha‑Kernel)</li>
+    <li><strong>CUBE_1</strong> – Aktion (BIOS‑Fixpunkt)</li>
+    <li><strong>CUBE_2</strong> – Stabilität (BIOS‑Fixpunkt)</li>
+    <li><strong>CUBE_3</strong> – SAFE / Real‑Mode (Führung)</li>
+  </ul>
+
+  <h3>Begriff: Evolieren</h3>
+  <p>
+    „Evolieren“ bedeutet: einen bestehenden Systemzustand kontrolliert weiterzuentwickeln,<br>
+    ohne die BIOS‑Fixpunkte zu zerstören und unter Nutzung der 4‑Fach‑Präzision.
+  </p>
+
+  <h3>Optionen (nur Text, keine Funktion)</h3>
+  <ol>
+    <li>SAFE / REAL‑MODE lesen und später implementieren</li>
+    <li>RAW‑WAR und Stress‑Modus später ergänzen</li>
+  </ol>
+
+  <p>
+    Diese Seite macht absichtlich nichts weiter.<br>
+    Sie ist nur ein Startpunkt, der funktioniert.
+  </p>
+
 </body>
 </html>
