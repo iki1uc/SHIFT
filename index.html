@@ -2,7 +2,7 @@
 <html lang="de">
 <head>
 <meta charset="UTF-8">
-<title>CUBE · index</title>
+<title>Willkommen</title>
 <style>
   body {
     margin: 0;
@@ -14,71 +14,32 @@
     align-items: center;
     height: 100vh;
   }
-  .panel {
-    width: 420px;
+  .door {
     background: #181818;
-    border: 1px solid #444;
+    padding: 30px;
     border-radius: 10px;
-    padding: 20px;
-  }
-  #input {
-    width: 100%;
-    padding: 8px;
-    background: #222;
-    color: #eee;
     border: 1px solid #444;
+    text-align: center;
+    width: 260px;
+  }
+  button {
+    margin-top: 14px;
+    padding: 8px 14px;
+    background: #444;
+    color: #eee;
+    border: none;
     border-radius: 4px;
-    margin-bottom: 12px;
+    cursor: pointer;
   }
-  #output {
-    height: 220px;
-    background: #151515;
-    border: 1px solid #333;
-    border-radius: 6px;
-    padding: 10px;
-    overflow-y: auto;
-    white-space: pre-line;
-    font-size: 14px;
-  }
+  button:hover { background:#666; }
 </style>
 </head>
 <body>
 
-<div class="panel">
-  <h3>CUBE · Eingabe / Ausgabe</h3>
-  <input id="input" placeholder="ANF 1 / STB 2 / UFR 3 …">
-  <div id="output">Bereit.</div>
+<div class="door">
+  <h2>WILLKOMMEN</h2>
+  <button onclick="location.href='cube.html'">CUBE starten</button>
 </div>
-
-<script>
-let lvl = 0;
-
-function log(t) {
-  const out = document.getElementById("output");
-  out.innerText += "\n" + t;
-  out.scrollTop = out.scrollHeight;
-}
-
-document.getElementById("input").addEventListener("keydown", e => {
-  if (e.key === "Enter") {
-    const val = e.target.value.trim();
-    if (!val) return;
-
-    const [cmd, numRaw] = val.split(" ");
-    const num = parseInt(numRaw) || 1;
-    const C = cmd.toUpperCase();
-
-    if (["ANF", "STB", "UFR"].includes(C)) {
-      lvl += num;
-      log("• " + C + " +" + num + " → LEVEL " + lvl);
-    } else {
-      log("• Unbekannter Move: " + val);
-    }
-
-    e.target.value = "";
-  }
-});
-</script>
 
 </body>
 </html>
