@@ -2,7 +2,7 @@
 <html lang="de">
 <head>
 <meta charset="UTF-8">
-<title>RAUM R*</title>
+<title>usemeX4 · HTML</title>
 <style>
   body {
     margin: 0;
@@ -14,25 +14,28 @@
     align-items: center;
     height: 100vh;
   }
-  .room {
-    border: 1px solid #555;
-    padding: 20px 30px;
-    border-radius: 8px;
-    min-width: 260px;
-    text-align: center;
+  .screen {
+    display: none;
     background: #181818;
+    padding: 30px 40px;
+    border-radius: 8px;
+    border: 1px solid #444;
+    min-width: 280px;
+    text-align: center;
   }
-  .state {
-    font-size: 18px;
+  .screen.active {
+    display: block;
+  }
+  .title {
+    font-size: 22px;
     margin-bottom: 10px;
   }
-  .move {
-    margin-top: 15px;
-    font-size: 14px;
-    opacity: 0.8;
+  .text {
+    font-size: 15px;
+    opacity: 0.9;
+    margin-bottom: 18px;
   }
   button {
-    margin-top: 15px;
     padding: 8px 16px;
     border: none;
     border-radius: 4px;
@@ -40,27 +43,53 @@
     color: #eee;
     cursor: pointer;
   }
+  textarea {
+    width: 100%;
+    height: 140px;
+    background: #111;
+    color: #eee;
+    border: 1px solid #444;
+    border-radius: 4px;
+    padding: 8px;
+    resize: vertical;
+    font-family: monospace;
+    font-size: 13px;
+  }
 </style>
 </head>
 <body>
 
-<div class="room">
-  <div class="state" id="state">s* = aktueller Raum</div>
-  <div class="move" id="move">m = RAW (noch nicht gesetzt)</div>
-  <button onclick="setMove()">RAW‑Move setzen</button>
+<!-- SCREEN 1: ALTER EINGANG -->
+<div class="screen active" id="screen-eingang">
+  <div class="title">EINGANG (ALT)</div>
+  <div class="text">
+    das ist der alte eingang<br>
+    startpunkt · neutral · kein eingabe‑raum
+  </div>
+  <button onclick="moveUsemeX4()">move: usemeX4</button>
+</div>
+
+<!-- SCREEN 2: EINGABE-RAUM HTML-HILFE -->
+<div class="screen" id="screen-html">
+  <div class="title">EINGABE · HTML‑HILFE</div>
+  <div class="text">
+    hier kannst du HTML roh einfügen<br>
+    dieser raum ist nach usemeX4 aktiv
+  </div>
+  <textarea placeholder="dein HTML hier (RAW)"></textarea>
 </div>
 
 <script>
-  let state = "s*";
-  let moveRaw = null;
+function show(id) {
+  document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+}
 
-  function setMove() {
-    moveRaw = prompt("m_raw eingeben:", "");
-    if (moveRaw === null) return;
-    document.getElementById("move").innerText = "m = " + moveRaw;
-    // hier könnte F(s, m) implementiert werden
-    // aktuell nur Anzeige → Referenzraum, kein Logikdruck
-  }
+// move usemeX4: vom alten Eingang in den Eingabe-Raum
+function moveUsemeX4() {
+  // hier könntest du später noch Logging / F(s,m) einbauen
+  show('screen-html');
+}
 </script>
 
 </body>
