@@ -3,13 +3,11 @@
     <!-- ACTION-RAUM: START -->
     <div id="action-raum">
 
-        <!-- Titel oben -->
         <h1>Action</h1>
 
-        <!-- Action-Block Mitte -->
         <div id="action-block">
             <p>Hier befindet sich der Action-Bereich.</p>
-<p id="status">Status: bereit</p>
+            <p id="status">Status: bereit</p>
 
             <div class="action-buttons">
                 <button id="start">Start</button>
@@ -29,26 +27,26 @@
         const startBtn = document.getElementById("start");
         const stopBtn = document.getElementById("stop");
         const resetBtn = document.getElementById("reset");
+        const status = document.getElementById("status");
 
         startBtn.addEventListener("click", () => {
             if (!running) {
                 running = true;
-                interval = setInterval(() => {
-                    console.log("ACTION: läuft...");
-                }, 1000);
+                status.textContent = "Status: läuft...";
+                interval = setInterval(() => {}, 1000);
             }
         });
 
         stopBtn.addEventListener("click", () => {
             running = false;
             clearInterval(interval);
-            console.log("ACTION: gestoppt");
+            status.textContent = "Status: gestoppt";
         });
 
         resetBtn.addEventListener("click", () => {
             running = false;
             clearInterval(interval);
-            console.log("ACTION: reset");
+            status.textContent = "Status: bereit";
         });
     </script>
     <!-- ACTION-JS: ENDE -->
