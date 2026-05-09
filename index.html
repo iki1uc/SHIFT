@@ -18,13 +18,13 @@
     const out = document.getElementById('out');
 
     if (v === "") {
-      out.textContent = "kein Input";
+      out.textContent = "#EMPTY";
       return;
     }
 
     // ACTION
     if (v.toLowerCase().startsWith("action")) {
-      out.textContent = "ACTION → " + v;
+      out.textContent = "#ACTION → " + v;
       return;
     }
 
@@ -32,7 +32,7 @@
     STATE = (STATE + 1) % 3;
     const s = ["neutral", "aktiv", "fokus"];
 
-    out.textContent = "STATE: " + s[STATE] + " | MOVE: " + v;
+    out.textContent = "#STATE " + s[STATE] + " | MOVE: " + v;
   }
 </script>
 
