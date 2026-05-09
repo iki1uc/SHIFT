@@ -4,68 +4,24 @@
   <meta charset="UTF-8">
   <title>nanoWÜRFEL</title>
   <style>
-    * { box-sizing: border-box; }
-    body {
-      margin: 0;
-      padding: 2rem;
-      background: #000;
-      color: #0f0;
-      font-family: monospace;
-    }
-    h1 {
-      margin-top: 0;
-      font-size: 1.4rem;
-    }
-    #wrap {
-      max-width: 600px;
-    }
-    label {
-      display: block;
-      margin-bottom: 0.5rem;
-    }
-    input {
-      width: 100%;
-      padding: 0.5rem;
-      background: #111;
-      border: 1px solid #0f0;
-      color: #0f0;
-    }
-    button {
-      margin-top: 0.5rem;
-      padding: 0.4rem 0.8rem;
-      background: #0f0;
-      color: #000;
-      border: none;
-      cursor: pointer;
-      font-family: monospace;
-    }
-    #cube {
-      margin-top: 1rem;
-      padding: 1rem;
-      border: 1px solid #0f0;
-      min-height: 2rem;
-      white-space: pre-wrap;
-    }
+    body { background:#000; color:#0f0; font-family: monospace; padding:2rem; }
+    #cube { border:1px solid #0f0; padding:1rem; margin-top:1rem; }
+    input { width:100%; padding:0.5rem; background:#111; border:1px solid #0f0; color:#0f0; }
+    button { margin-top:0.5rem; padding:0.5rem; background:#0f0; color:#000; border:none; cursor:pointer; }
   </style>
 </head>
 <body>
-  <div id="wrap">
-    <h1>nanoWÜRFEL</h1>
+  <h1>nanoWÜRFEL</h1>
 
-    <label for="in">Eingabe:</label>
-    <input id="in" autocomplete="off" onkeydown="if(event.key==='Enter') roll()">
+  <input id="in" placeholder="Move eingeben…" onkeydown="if(event.key==='Enter') roll()">
+  <button onclick="roll()">WÜRFELN</button>
 
-    <button onclick="roll()">WÜRFELN</button>
-
-    <div id="cube"></div>
-  </div>
+  <div id="cube"></div>
 
   <script>
     function roll() {
-      const input = document.getElementById('in');
-      const v = input.value.trim();
-      const out = v === '' ? 'kein Move' : 'Move: ' + v;
-      document.getElementById('cube').textContent = out;
+      const v = document.getElementById('in').value.trim();
+      document.getElementById('cube').textContent = v === '' ? 'kein Move' : 'Move: ' + v;
     }
   </script>
 </body>
