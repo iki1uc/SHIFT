@@ -3,26 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <title>nanoWÜRFEL</title>
-  <style>
-    body { background:#000; color:#0f0; font-family: monospace; padding:2rem; }
-    #cube { border:1px solid #0f0; padding:1rem; margin-top:1rem; }
-    input { width:100%; padding:0.5rem; background:#111; border:1px solid #0f0; color:#0f0; }
-    button { margin-top:0.5rem; padding:0.5rem; background:#0f0; color:#000; border:none; cursor:pointer; }
-  </style>
 </head>
 <body>
-  <h1>nanoWÜRFEL</h1>
 
-  <input id="in" placeholder="Move eingeben…" onkeydown="if(event.key==='Enter') roll()">
-  <button onclick="roll()">WÜRFELN</button>
-
-  <div id="cube"></div>
-
-  <script>
-    function roll() {
-      const v = document.getElementById('in').value.trim();
-      document.getElementById('cube').textContent = v === '' ? 'kein Move' : 'Move: ' + v;
-    }
-  </script>
 </body>
 </html>
