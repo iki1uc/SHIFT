@@ -1,127 +1,33 @@
+# Cube 3 — Technische Dokumentation
 
-📘 README — TECHNISCHE VERSION (CUBE 3)
-1. Systemübersicht
-Cube 3 ist ein ephemeres Kompetenz‑ und Evolutionsmodul.
-Es speichert keine Daten, keine Level, keine Modifikationen und keine Nutzeridentität.
+Cube 3 ist ein ephemeres Kompetenz‑ und Evolutionsmodul.  
+Es speichert keine Daten, keine Level, keine Modifikationen und keine Nutzeridentität.  
 Alle Effekte gelten ausschließlich innerhalb der Sitzung.
 
+---
+
+## 1. Systemübersicht
+
+Cube 3 bewertet Kompetenz, Verhalten und Steigerung in Echtzeit.  
+Es existiert kein Persistenz‑ oder Login‑System.  
+Jede Sitzung beginnt bei Null.
+
 Zentrale Komponenten:
+- Kompetenzfragen
+- Anforderungen
+- Intensitätsstufen
+- Modifikationen
+- Stop‑System
 
-Kompetenzfragen
+---
 
-Anforderungen
+## 2. Architektur
 
-Intensitätsstufen
-
-Modifikationen
-
-Stop‑System
-
-2. Architektur
 Cube 3 arbeitet vollständig sitzungsgebunden.
 
-Code
+```text
 session_start:
     level = 0
     intensity = 0
     modifications = 0
     parade_used = 0
-Beim Verlassen:
-
-Code
-session_end:
-    clear_all()
-Es existiert keine Mitnahme von Effekten, da kein Login‑System vorhanden ist.
-
-3. Level‑Up‑Mechanik
-Ein Level‑Up wird ausgelöst durch:
-
-Kompetenzfrage
-
-erfüllte Anforderungen
-
-evolutive Intensitätssteigerung
-
-Mechanisch:
-
-Code
-IF competence_question AND requirements_met AND intensity_rise:
-    level += 1
-    modifications += 1
-Modifikationen sind temporär, nicht übertragbar, nicht persistent.
-
-4. Paraderollen & Klassiker
-Nur hochwertige Kompetenzfragen können Level‑Ups auslösen.
-
-Paraderolle → hoher Intensitätsimpuls
-
-Klassiker → normaler Intensitätsimpuls
-
-Mechanisch:
-
-Code
-IF question_quality == parade:
-    intensity += 2
-ELSE IF question_quality == classic:
-    intensity += 1
-5. Anforderungen
-Ein Level‑Up erfolgt nur, wenn alle Anforderungen erfüllt sind.
-
-Beispielstruktur:
-
-Code
-requirements:
-    - korrektes Verhalten
-    - Wiederholung
-    - Steigerung
-    - Mustererkennung
-Mechanisch:
-
-Code
-IF requirements_met == false:
-    deny_level_up
-6. Stop‑System (final, alle 3 aktiv)
-Cube 3 nutzt drei parallele Begrenzungen, um unendliche Aufstiege zu verhindern.
-
-6.1 Max‑Level
-Code
-max_level = 4
-IF level >= max_level:
-    no_more_level_up = true
-6.2 Intensitätslimit
-Code
-max_intensity = 3
-IF intensity >= max_intensity:
-    no_more_intensity_gain = true
-6.3 Paraderollen‑Limit
-Code
-max_parade = 2
-IF parade_used >= max_parade:
-    no_more_parade_bonus = true
-6.4 Final‑Logik
-Code
-IF competence_question AND requirements_met:
-    IF level < max_level AND intensity < max_intensity AND parade_used < max_parade:
-        level += 1
-        modifications += 1
-    ELSE:
-        show("Maximale Stufe erreicht.")
-7. Ephemerer Nutzen
-Cube 3 erzeugt beim Wiederkommen einen Klarheits‑Sprung, aber keinen Fortschritt.
-
-„Der Nutzer startet bei Null, versteht aber mehr als zuvor.“
-
-Dies ist ein Systemeffekt, kein Speichermechanismus.
-
-8. Zielsetzung
-Cube 3 soll:
-
-Kompetenz sichtbar machen
-
-Verhalten evaluieren
-
-Intensität steigern
-
-Wiederkehr belohnen
-
-aber keine dauerhaften Fähigkeiten erzeugen
