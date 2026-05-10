@@ -1,11 +1,25 @@
-n = 1..6
+# Mini‑Würfel‑System (README‑MINI)
+
+Dieses System beschreibt n parallele Mini‑Würfel W_i, die gemeinsam
+eine Achse F bilden.
+
+## Struktur
+n = 1..6  
 W_i = (D_i, T_i, Q_i, O_i)
-D_i = Dual (2 Pole)
-T_i = Trio (3 Punkte)
-Q_i = Quart (4 Flächen, optional)
-O_i = Optik (Tiefe, optional)
+
+- D_i = Dual (2 Pole)  
+- T_i = Trio (3 Punkte)  
+- Q_i = Quart (4 Flächen, optional)  
+- O_i = Optik (Tiefe, optional)
+
+## Menge
 S = { W_1, W_2, ..., W_n }
+
+## Final
 F = Achse(W_1, W_2, ..., W_n)
+
+## Visual
+Einzelwürfel:
       +---------+
      /         /|
     /   W_i   / |
@@ -15,7 +29,7 @@ F = Achse(W_1, W_2, ..., W_n)
    |         | /
    +---------+/
 
-W_i = (D_i, T_i, Q_i, O_i)
+Mehrere Würfel:
       +---------+      +---------+      +---------+
      /         /|     /         /|     /         /|
     /  W_1    / |    /  W_2    / |    /  W_n    / |
@@ -24,6 +38,11 @@ W_i = (D_i, T_i, Q_i, O_i)
    |         |  +   |         |  +   |         |  +
    |         | /    |         | /    |         | /
    +---------+/     +---------+/     +---------+/
+
+Achse:
 W_1 ---- W_2 ---- ... ---- W_n  ==>  F
 
-F = Achse(W_1, W_2, ..., W_n)
+## IST / SOLL
+IST: gültig  
+SOLL: gültig  
+Keine Änderung nötig.
