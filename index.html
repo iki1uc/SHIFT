@@ -8,29 +8,30 @@
   <link rel="stylesheet" href="style.css">
 
   <!-- JS-KERNE -->
-  <script src="cube-core.js"></script>
-  <script src="verhandlungcore.js"></script>
+  <script src="cube-core.js" defer></script>
+  <script src="verhandlung-core.js" defer></script>
+  <script src="action-core.js" defer></script>
 </head>
 
 <body>
 
 <!-- NAVIGATION -->
-<div id="nav">
+<nav id="nav">
   <a href="#action-raum">Action</a>
   <a href="#systemkern">Systemkern</a>
   <a href="#non">NoN</a>
   <a href="#uebersicht">Übersicht</a>
-</div>
+</nav>
 
 <!-- CUBES -->
-<div id="cubes">
+<section id="cubes">
   <div class="cube" id="cube1">1</div>
   <div class="cube" id="cube2">2</div>
   <div class="cube" id="cube3">3</div>
-</div>
+</section>
 
 <!-- ACTION-RAUM -->
-<div id="action-raum">
+<section id="action-raum" class="block">
   <h1>Action</h1>
 
   <p id="status">Status: bereit</p>
@@ -40,10 +41,10 @@
     <button id="stop">Stop</button>
     <button id="reset">Reset</button>
   </div>
-</div>
+</section>
 
 <!-- SYSTEMKERN -->
-<div id="systemkern" class="block">
+<section id="systemkern" class="block">
   <div class="label">Systemkern</div>
   <h2>Trihundertvier‑NoN‑144</h2>
 
@@ -58,10 +59,10 @@
     Modus: html.exe<br>
     Start: index.html
   </div>
-</div>
+</section>
 
 <!-- NoN -->
-<div id="non" class="block">
+<section id="non" class="block">
   <div class="label">NoN‑Modus</div>
   <h2>NoN – Not‑a‑Number</h2>
 
@@ -75,46 +76,14 @@
     Status: Aktiv<br>
     Funktion: Kontrollpunkt zwischen 304 und 144
   </div>
-</div>
+</section>
 
 <!-- ÜBERSICHT -->
-<div id="uebersicht" class="block">
+<section id="uebersicht" class="block">
   <div class="label">Systemübersicht</div>
   <h2>System – 304 / NoN / 144</h2>
-
   <p>Diese drei Elemente bilden die funktionale Architektur.</p>
-</div>
-
-<!-- ACTION-JS -->
-<script>
-let running = false;
-let interval = null;
-
-const startBtn = document.getElementById("start");
-const stopBtn = document.getElementById("stop");
-const resetBtn = document.getElementById("reset");
-const statusBox = document.getElementById("status");
-
-startBtn.addEventListener("click", () => {
-  if (!running) {
-    running = true;
-    statusBox.textContent = "Status: läuft...";
-    interval = setInterval(() => {}, 1000);
-  }
-});
-
-stopBtn.addEventListener("click", () => {
-  running = false;
-  clearInterval(interval);
-  statusBox.textContent = "Status: gestoppt";
-});
-
-resetBtn.addEventListener("click", () => {
-  running = false;
-  clearInterval(interval);
-  statusBox.textContent = "Status: bereit";
-});
-</script>
+</section>
 
 </body>
 </html>
