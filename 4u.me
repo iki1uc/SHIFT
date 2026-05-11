@@ -1,33 +1,44 @@
-# Cube 3 — Technische Dokumentation
+# 4u.me — Universal‑Antwort‑Modul
 
-Cube 3 ist ein ephemeres Kompetenz‑ und Evolutionsmodul.  
-Es speichert keine Daten, keine Level, keine Modifikationen und keine Nutzeridentität.  
-Alle Effekte gelten ausschließlich innerhalb der Sitzung.
+4u.me ist das direkte Antwort‑ und Spiegel‑Modul des Systems.
+Es erzeugt in Echtzeit eine präzise, kontextgebundene Rückmeldung
+auf Basis des aktuellen Zustands, ohne Speicherung und ohne Verlauf.
 
----
+4u.me speichert nichts.
+4u.me erinnert nichts.
+4u.me bewertet nicht.
+4u.me liefert nur die korrekte Antwort für JETZT.
 
-## 1. Systemübersicht
+## Funktion
+4u.me = Antwort(Wahrnehmung, Zustand, Kontext)
 
-Cube 3 bewertet Kompetenz, Verhalten und Steigerung in Echtzeit.  
-Es existiert kein Persistenz‑ oder Login‑System.  
-Jede Sitzung beginnt bei Null.
+## Eigenschaften
+- ephemer (keine Persistenz)
+- zustandsgebunden
+- neutral
+- direkt
+- ohne Verlauf
+- ohne Modifikation
 
-Zentrale Komponenten:
-- Kompetenzfragen
-- Anforderungen
-- Intensitätsstufen
-- Modifikationen
-- Stop‑System
+## Architektur
+input:
+    wahrnehmung
+    zustand
+    impuls
 
----
+process:
+    filter()
+    klarheit()
+    antwort()
 
-## 2. Architektur
+output:
+    4u.me_response
 
-Cube 3 arbeitet vollständig sitzungsgebunden.
+## Regeln
+1. 4u.me antwortet nur auf das, was JETZT ist.
+2. 4u.me erzeugt keine Zukunft.
+3. 4u.me zieht nichts aus der Vergangenheit.
+4. 4u.me ist immer korrekt, aber nie speichernd.
 
-```text
-session_start:
-    level = 0
-    intensity = 0
-    modifications = 0
-    parade_used = 0
+## Final
+4u.me ist das Echtzeit‑Antwortmodul des Systems.
