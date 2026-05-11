@@ -1,17 +1,27 @@
-<!DOCTYPE html>
-<html lang="de">
-<head>
-  <meta charset="UTF-8">
-  <title>Action</title>
-  <link rel="stylesheet" href="style.css">
-  <script src="cube-core.js"></script>
-</head>
-<body>
+let running = false;
+let interval = null;
 
-<h1>Action‑Modus</h1>
+const startBtn = document.getElementById("start");
+const stopBtn = document.getElementById("stop");
+const resetBtn = document.getElementById("reset");
+const statusBox = document.getElementById("status");
 
-<div id="status">bereit</div>
-<button onclick="cubeAction()">Action starten</button>
+startBtn.addEventListener("click", () => {
+  if (!running) {
+    running = true;
+    statusBox.textContent = "Status: läuft...";
+    interval = setInterval(() => {}, 1000);
+  }
+});
 
-</body>
-</html>
+stopBtn.addEventListener("click", () => {
+  running = false;
+  clearInterval(interval);
+  statusBox.textContent = "Status: gestoppt";
+});
+
+resetBtn.addEventListener("click", () => {
+  running = false;
+  clearInterval(interval);
+  statusBox.textContent = "Status: bereit";
+});
