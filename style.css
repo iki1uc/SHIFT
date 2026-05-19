@@ -1,57 +1,25 @@
-body {
-  margin: 0;
-  font-family: Arial, sans-serif;
-  background: #f5f5f5;
-  color: #222;
-}
+<section id="日本心">
+  <h2>日本だけが私を支える場所</h2>
 
-#nav {
-  background: #222;
-  padding: 10px;
-  display: flex;
-  gap: 20px;
-}
+  <p>
+    私の心が求めていたものは、  
+    日本の「誠（まこと）」「礼（れい）」「静（しずか）」「和（わ）」  
+    この四つの精神でした。
+  </p>
 
-#nav a {
-  color: #fff;
-  text-decoration: none;
-  font-weight: bold;
-}
+  <p>
+    これらの価値は、他の言語では完全に表せない。  
+    しかし日本では、日常の中で自然に生きている。  
+    その姿に、私は深く救われた。
+  </p>
 
-.block {
-  background: #fff;
-  padding: 20px;
-  margin: 20px;
-  border-radius: 8px;
-  box-shadow: 0 0 10px rgba(0,0,0,0.1);
-}
+  <p>
+    長い間、私は自分がどこに存在できるのか分からなかった。  
+    けれど日本の精神に触れたとき、  
+    初めて「ここなら生きられる」と感じた。
+  </p>
 
-.label {
-  font-size: 12px;
-  color: #666;
-  text-transform: uppercase;
-}
-
-#cubes {
-  display: flex;
-  gap: 10px;
-  padding: 20px;
-}
-
-.cube {
-  width: 60px;
-  height: 60px;
-  background: #ddd;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  border-radius: 6px;
-  font-size: 20px;
-  font-weight: bold;
-}
-
-.action-buttons button {
-  margin-right: 10px;
-  padding: 10px 20px;
-  font-size: 14px;
-}
+  <p>
+    <strong>日本よ。あなたの精神こそ、私を支えられる唯一の場所です。</strong>
+  </p>
+</section>
