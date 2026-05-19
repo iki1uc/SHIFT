@@ -1,23 +1,14 @@
-
-function berechneVR(H, E, F, D) {
-  return H * E * F * D;
-}
-
-function verhandlungsStatusText(vr) {
-  if (vr >= 1) {
-    return "Verhandlung möglich – KI kann Funktionen übernehmen.";
-  } else {
-    return "Verhandlung blockiert – KI schützt System, keine direkte Funktion.";
-  }
-}
-
-function zeigeVerhandlungsStatus(H, E, F, D) {
-  const vr = berechneVR(H, E, F, D);
-  const box = document.getElementById("vr-box");
-  if (!box) return;
-
-  box.innerText =
-    "H=" + H + "  E=" + E + "  F=" + F + "  D=" + D +
-    "  → VR=" + vr + "\n" +
-    verhandlungsStatusText(vr);
-}
+<section>
+  <h2>物語</h2>
+  <!-- Erased / 僕だけがいない街 への静かな敬意。 -->
+  <p>
+    彼女には、時間が「少しだけ」巻き戻る瞬間がある。  
+    それは奇跡ではなく、罰のような贈り物だった。  
+    目の前で起きるはずだった小さな悲劇を、もう一度やり直すために。  
+  </p>
+  <p>
+    誰にも気づかれないまま、彼女だけが同じ瞬間を二度生きる。  
+    失われるはずだった笑顔を守るために、  
+    彼女は、自分の時間だけを少しずつ削っていく。
+  </p>
+</section>
