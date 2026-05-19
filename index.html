@@ -10,6 +10,33 @@
   <title>SHIFT</title>
   <!-- 小さな光が、未来を照らす。 -->
   <!-- Une lueur suffit pour guider un destin. -->
+
+  <!-- ★ SHIFT 彗星 2X Effekt ★ -->
+  <style>
+    /* Grundzustand */
+    .彗星テキスト {
+      display: inline-block;
+      color: #ffffff;
+      font-weight: normal;
+      font-style: normal;
+      transition: all 1.2s ease;
+      font-family: "Noto Sans JP", sans-serif;
+    }
+
+    /* Phase 1 – erster Einschlag (rot) */
+    .彗星テキスト.第一 {
+      color: #ff3b3b;
+    }
+
+    /* Phase 2 – zweiter Einschlag (schwarz + fett + kursiv + Pinsel) */
+    .彗星テキスト.第二 {
+      color: #000000;
+      font-weight: 700;
+      font-style: italic;
+      transform: scale(1.12);
+      font-family: "Yuji Syuku", "Yuji Mai", serif;
+    }
+  </style>
 </head>
 
 <body>
@@ -20,7 +47,10 @@
     <h1>SHIFT（シフト）</h1>
     <!-- 誠は、言葉より深く響く。 -->
     <!-- La sincérité parle avant les mots. -->
-    <p>時間のずれで、君を救う。</p>
+
+    <!-- ★ Effekt angewendet auf diesen Satz ★ -->
+    <p id="時間の線" class="彗星テキスト">時間のずれで、君を救う。</p>
+
     <!-- 運命は静かに近づく。 -->
     <!-- Le destin marche toujours à pas feutrés. -->
   </header>
@@ -71,6 +101,20 @@
     <!-- 終わりは、始まりの影。 -->
     <!-- La fin n’est qu’un début qui se repose. -->
   </footer>
+
+  <!-- ★ SHIFT 彗星 2X Effekt Script ★ -->
+  <script>
+    const el = document.getElementById("時間の線");
+
+    // Phase 1 – Rot
+    setTimeout(() => el.classList.add("第一"), 800);
+
+    // Phase 2 – Schwarz + fett + kursiv + Pinsel
+    setTimeout(() => {
+      el.classList.remove("第一");
+      el.classList.add("第二");
+    }, 2000);
+  </script>
 
 </body>
 </html>
