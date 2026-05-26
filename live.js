@@ -1,32 +1,52 @@
-// CUBE‑LIVE · SOLL-Version
-// ID: CUBE‑LIVE / FILE: live.js / ROLE: Echtzeit-Motor (Kernkompetenz)
+// CUBE‑LIVE · SOLL-Version + System-Integration
+// ID: CUBE‑LIVE / ROLE: Echtzeit-Motor
 
-// 1) Kontext lesen (LIVE entscheidet nichts, LIVE reagiert nur)
 const CUBE_ID = "CUBE-LIVE";
 const ROLE = "Echtzeit-Motor";
 
-const MODE = localStorage.getItem("MODE") || "AB";
-const GRAV = localStorage.getItem("GRAV") || "0";
 let STATE = localStorage.getItem("STATE") || "idle";
 
-// 2) Kernkompetenz: LIVE setzt den aktuellen Zustand
+// --- System-Integration ---
+
+function liveGetSchiene() {
+  return {
+    prev: localStorage.getItem("PREV") || "unknown",
+    now: "LIVE",
+    next: localStorage.getItem("NEXT") || "unknown"
+  };
+}
+
+function liveGetGrav() {
+  return localStorage.getItem("GRAV") || "0";
+}
+
+function liveGetCluster() {
+  return localStorage.getItem("MODE") || "AB";
+}
+
+function liveChain(next) {
+  localStorage.setItem("PREV", "LIVE");
+  localStorage.setItem("NEXT", next);
+}
+
+// --- Kernkompetenz ---
+
 function liveSetState(newState) {
   STATE = newState;
   localStorage.setItem("STATE", newState);
 }
 
-// 3) Kernfunktion: Realtime-Reaktion
 function liveCore(input) {
   return {
     in: input,
     out: `LIVE(${input})`,
-    mode: MODE,
-    grav: GRAV,
-    state: STATE
+    mode: liveGetCluster(),
+    grav: liveGetGrav(),
+    state: STATE,
+    schiene: liveGetSchiene()
   };
 }
 
-// 4) Ausgabe (neutral, wissenschaftlich, klar)
 function live_out(data) {
   document.getElementById("out").innerHTML = `
     <div class="out-title">CUBE‑LIVE – Echtzeit (SOLL)</div>
@@ -35,5 +55,6 @@ function live_out(data) {
     <div class="out-mode"><b>MODE:</b> ${data.mode}</div>
     <div class="out-grav"><b>GRAV:</b> ${data.grav}</div>
     <div class="out-state"><b>STATE:</b> ${data.state}</div>
+    <div class="out-schiene"><b>SCH:</b> ${data.schiene.prev} → LIVE → ${data.schiene.next}</div>
   `;
 }
