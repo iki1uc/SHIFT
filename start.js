@@ -1,4 +1,3 @@
-
 // SHIFT-System Instanz
 
 if (!localStorage.getItem("PREV")) localStorage.setItem("PREV", "index");
