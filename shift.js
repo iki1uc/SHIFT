@@ -34,3 +34,29 @@ function shift_out(data) {
     <p><b>SCH:</b> ${data.schiene.prev} → SHIFT → ${data.schiene.next}</p>
   `;
 }
+// --- OS: SHIFT kann LIVE starten ---
+function shiftStartLIVE() {
+  localStorage.setItem("PREV", "SHIFT");
+  localStorage.setItem("NEXT", "LIVE");
+
+  const script = document.createElement("script");
+  script.src = "live.js";
+  document.head.appendChild(script);
+
+  script.onload = () => {
+    const result = liveCore("from SHIFT");
+    shift_out({
+      ...result,
+      out: "SHIFT → LIVE gestartet"
+    });
+  };
+}
+
+// --- OS: SHIFT kann LIVE stoppen und zurückkehren ---
+function shiftReturn() {
+  localStorage.setItem("PREV", "LIVE");
+  localStorage.setItem("NEXT", "SHIFT");
+
+  const result = shiftCore("return");
+  shift_out(result);
+}
