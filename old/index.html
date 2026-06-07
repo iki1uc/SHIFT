@@ -1,72 +1,34 @@
 <!DOCTYPE html>
-<html lang="ja">
-
+<html>
 <head>
-  <meta charset="UTF-8">
-  <title>SHIFT</title>
+    <meta charset="UTF-8">
+    <title>ALT INDEX</title>
 
-  <style>
-    /* Grundzustand */
-    .彗星テキスト {
-      display: inline-block;
-      color: #ffffff;
-      font-weight: normal;
-      font-style: normal;
-      transition: all 1.2s ease;
-      font-family: "Noto Sans JP", sans-serif;
-    }
+    <style>
+        body.old-effect {
+            animation: oldPulse 1.5s infinite;
+            color: #ff8800;
+        }
 
-    /* Shine X4 Schrift (iki2li Größe) */
-    .彗星X4 {
-      font-size: 28px;
-      line-height: 1.4;
-      letter-spacing: 0.5px;
-    }
+        @keyframes oldPulse {
+            0% { filter: brightness(1); }
+            50% { filter: brightness(1.4); }
+            100% { filter: brightness(1); }
+        }
 
-    /* Phase 1 – Rot */
-    .彗星テキスト.第一 {
-      color: #ff3b3b;
-    }
-
-    /* Phase 2 – Schwarz + fett + kursiv + Pinsel */
-    .彗星テキスト.第二 {
-      color: #000000;
-      font-weight: 700;
-      font-style: italic;
-      transform: scale(1.12);
-      font-family: "Yuji Syuku", "Yuji Mai", serif;
-    }
-  </style>
+        a {
+            color: #ff8800;
+            font-weight: bold;
+        }
+    </style>
 </head>
 
-<body>
+<body class="old-effect">
 
-  <header>
-    <h1>SHIFT（シフト）</h1>
+    <h1>ALTER INDEX AKTIV</h1>
 
-    <!-- Shine‑Text -->
-    <p id="時間の線" class="彗星テキスト">時間のずれで、君を救う。</p>
-  </header>
+    <!-- Link zurück zum NEU-Index -->
+    <a href="/index.html">NEU STARTEN</a>
 
-  <main>
-    <section>
-      <h2>物語</h2>
-      <p>
-        彼女は、遠く離れた誰かの未来の災害を「先に」見てしまう。
-        それは、救えるかもしれないという、ささやかな希望だった。
-      </p>
-    </section>
-
-    <section>
-      <h2>メニュー</h2>
-      <ul>
-        <li>ホーム</li>
-        <li>キャラクター</li>
-        <li>時間システム</li>
-        <li>エピソード</li>
-      </ul>
-    </section>
-  </main>
-
-  <footer>
-    <p>© SHIFT</p>
+</body>
+</html>
