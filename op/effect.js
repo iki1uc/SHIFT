@@ -1,7 +1,6 @@
 export async function runEffect(containerId, textFile) {
   const container = document.getElementById(containerId);
 
-  // externe Datei laden
   const text = await fetch(textFile).then(r => r.text());
   const sentences = text.trim().split("\n");
 
@@ -10,24 +9,42 @@ export async function runEffect(containerId, textFile) {
     const line = document.createElement("div");
     container.appendChild(line);
 
-    for (let w of words) {
+    // ZEITKORRIDOR (in ms)
+    const corridor = 800;
+
+    // jedes Wort bekommt eine eigene Zeit im Korridor
+    const timings = words.map(() => Math.random() * corridor);
+
+    // Wörter erzeugen (unsichtbar)
+    const spans = words.map(w => {
       const span = document.createElement("span");
       span.className = "word";
       span.textContent = w + " ";
       line.appendChild(span);
+      return span;
+    });
 
-      await new Promise(r => setTimeout(r, 120));
+    // Wörter erscheinen im Korridor
+    for (let i = 0; i < spans.length; i++) {
+      await new Promise(r => setTimeout(r, timings[i]));
+      spans[i].style.opacity = 1;
+    }
+
+    // ERGEBNIS‑VERZÖGERUNG
+    await new Promise(r => setTimeout(r, corridor));
+
+    // jetzt erst: landed (rot → schwarz)
+    for (let span of spans) {
       span.classList.add("landed");
     }
 
-    // vorherige Zeile unsichtbar machen
+    // vorherige Zeile unsichtbar
     if (index > 0) {
-      const prev = container.children[index - 1];
-      prev.style.opacity = 0;
+      container.children[index - 1].style.opacity = 0;
     }
   }
 
-  // Ablauf: Satz für Satz
+  // Sätze nacheinander
   for (let i = 0; i < sentences.length; i++) {
     await dropSentence(sentences[i], i);
   }
