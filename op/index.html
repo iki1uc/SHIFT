@@ -1,1 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+<link rel="stylesheet" href="effect.css">
+</head>
+
+<body style="background:#0d0d0f;color:#00eaff;font-family:monospace;">
+
+<h1>OP – Landing Effekt</h1>
+
+<button id="start">Start</button>
+
+<div id="panel"></div>
+
+<script type="module">
+import { runEffect } from './effect.js';
+
+document.getElementById("start").onclick = () => {
+  runEffect("panel", "text.txt");
+};
+</script>
+
+</body>
+</html>
 
