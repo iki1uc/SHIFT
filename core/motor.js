@@ -1,4 +1,4 @@
-// SHIFT: Motor Core (voll erweitert)
+// SHIFT: Motor Core
 
 const motor = [
   { name: "IKI", time: () => 800 + Math.random() * 400 },
@@ -8,6 +8,7 @@ const motor = [
 
 let pos = 0;
 let listeners = [];
+let running = false;
 
 export function onMotorStep(fn) {
   listeners.push(fn);
@@ -18,6 +19,8 @@ function broadcast(stepName) {
 }
 
 export function runMotor() {
+  if (!running) return;
+  
   const step = motor[pos];
   const duration = typeof step.time === "function" ? step.time() : step.time;
 
@@ -27,4 +30,13 @@ export function runMotor() {
     pos = (pos + 1) % motor.length;
     runMotor();
   }, duration);
+}
+
+export function startMotor() {
+  running = true;
+  runMotor();
+}
+
+export function stopMotor() {
+  running = false;
 }
