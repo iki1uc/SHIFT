@@ -1,4 +1,4 @@
-// SHIFT: Motor Core (erweitert)
+// SHIFT: Motor Core (voll erweitert)
 
 const motor = [
   { name: "IKI", time: () => 800 + Math.random() * 400 },
@@ -7,17 +7,24 @@ const motor = [
 ];
 
 let pos = 0;
+let listeners = [];
 
-function runMotor() {
+export function onMotorStep(fn) {
+  listeners.push(fn);
+}
+
+function broadcast(stepName) {
+  listeners.forEach(fn => fn(stepName));
+}
+
+export function runMotor() {
   const step = motor[pos];
   const duration = typeof step.time === "function" ? step.time() : step.time;
 
-  broadcast(step.name); // SHINE/SEEÜ Hook
+  broadcast(step.name);
 
   setTimeout(() => {
     pos = (pos + 1) % motor.length;
     runMotor();
   }, duration);
 }
-
-runMotor();
